@@ -1,0 +1,16 @@
+{
+  "name": "Base Docente · DCFyCCCO",
+  "short_name": "Base Docente",
+  "description": "Panel del Registro Docente 2027 · Secretaría Académica DCFyCCCO",
+  "start_url": "./panel.html",
+  "scope": "./",
+  "display": "standalone",
+  "orientation": "any",
+  "background_color": "#07070D",
+  "theme_color": "#07070D",
+  "lang": "es",
+  "icons": [
+    { "src": "icon-192.png", "sizes": "192x192", "type": "image/png", "purpose": "any maskable" },
+    { "src": "icon-512.png", "sizes": "512x512", "type": "image/png", "purpose": "any maskable" }
+  ]
+}

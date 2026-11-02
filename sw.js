@@ -1,0 +1,19 @@
+// Base Docente · DCFyCCCO — service worker (permite instalar el panel como app)
+const CACHE = 'base-docente-v1.7.0';
+const BASE = ['panel.html', 'manifest.webmanifest', 'icon-192.png', 'icon-512.png', 'config.js'];
+self.addEventListener('install', e => {
+  self.skipWaiting();
+  e.waitUntil(caches.open(CACHE).then(c => Promise.all(BASE.map(u => c.add(u).catch(() => {})))));
+});
+self.addEventListener('activate', e => e.waitUntil(
+  caches.keys().then(ks => Promise.all(ks.filter(k => k !== CACHE).map(k => caches.delete(k)))).then(() => self.clients.claim())
+));
+// Siempre busca la versión nueva en internet; si no hay conexión, usa la guardada.
+self.addEventListener('fetch', e => {
+  const r = e.request;
+  if (r.method !== 'GET' || new URL(r.url).origin !== location.origin) return;
+  e.respondWith(
+    fetch(r).then(res => { const cp = res.clone(); caches.open(CACHE).then(c => c.put(r, cp)); return res; })
+            .catch(() => caches.match(r))
+  );
+});
