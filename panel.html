@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
-<meta name="version" content="1.9.1">
+<meta name="version" content="1.9.2">
 <meta name="theme-color" content="#061A20">
 <meta name="description" content="Registro Docente 2027 · Escuela de Agentes de Seguridad · DCFyCCCO">
 <title>Base Docente · DCFyCCCO</title>
@@ -345,6 +345,9 @@ footer{text-align:center;color:var(--mut);font-size:12px;margin-top:40px}
 .exento i{font-style:normal;font-size:24px;flex:none}
 .exento b{color:var(--ink)}
 .opc{font-weight:500;color:var(--mut);font-size:12px}
+
+.fx-acts{display:flex;flex-wrap:wrap;gap:8px;margin-top:14px}
+.fx-acts .btn{flex:1 1 auto}
 
 /* ===== PANEL ===== */
 .top{display:flex;align-items:center;justify-content:space-between;gap:12px;flex-wrap:wrap;margin:6px 0 18px}
@@ -709,6 +712,7 @@ function docEstado(d){
   return {ok:CHECK.length-falta.length, tot:CHECK.length, falta, tiene};
 }
 const CAT_TXT = Object.fromEntries(CATS.map(c=>[c.id,c.t]));
+const ZIPN = {dni:'1_DNI',cuil:'2_CUIL',titulo:'3_Ultimo_titulo',ant_prov:'4_Antecedentes_provincial',ant_nac:'5_Antecedentes_nacional',medico:'6_Certificado_medico',cbu:'7_CBU',sufragio:'8_Constancia_sufragio',cursos:'9_Cursos'};
 const CAT_CORTO = {dni:'DNI',cuil:'CUIL',titulo:'Título',ant_prov:'Antec. provincial',ant_nac:'Antec. nacional',medico:'Cert. médico',cbu:'CBU',sufragio:'Sufragio',cursos:'Cursos'};
 const MAX = 10*1024*1024;
 const TIPOS = ['application/pdf','image/jpeg','image/png','image/webp'];
@@ -1157,6 +1161,11 @@ async function ver(id){
     <div class="row" style="justify-content:space-between"><div class="pills" style="justify-content:flex-start"><span class="pill p-${d.situacion}">${SIT_TXT[d.situacion]}</span>${d.condicion_docente?`<span class="pill p-${condK(d.condicion_docente)}">${COND_TXT[d.condicion_docente]}</span>`:''}</div>
       <span style="color:var(--mut);font-size:13px">#${pad(d.nro)} · ${fmtFecha(d.creado)}</span></div>
     <h3 style="margin-top:12px">${esc(d.apellido.toUpperCase())}, ${esc(d.nombre)}</h3>
+    <div class="fx-acts">
+      <button class="btn sm dark" id="bFicha" onclick="bajarFicha('${d.id}')">📄 Ficha del docente (PDF)</button>
+      ${docs.length?`<button class="btn sm ghost" id="bZip" onclick="bajarZip('${d.id}')">📎 Su documentación (ZIP)</button>`:''}
+      <button class="btn sm ghost" id="bLeg" onclick="bajarZip('${d.id}',true)">🗂 Legajo completo (ZIP)</button>
+    </div>
     <dl class="dl">
       ${row('D.N.I.',d.dni)}${row('Nacimiento',d.fecha_nac?`${fDia(d.fecha_nac)} (${edad(d.fecha_nac)} años)`:'')}
       ${row('Domicilio',[d.domicilio,d.ciudad].filter(Boolean).join(' · '))}
@@ -1168,7 +1177,7 @@ async function ver(id){
       ${row('Experiencia en la Escuela',COND_TXT[d.condicion_docente])}${row('Materia/s que dicta',d.materia_actual)}
       ${row('Materias de interés',d.materias)}${row('Opinión / observaciones',d.observaciones)}${row('Última edición',d.actualizado?fmtFecha(d.actualizado):'')}${row('Título',d.titulo)}${row('Cursos',d.cursos)}${row('Otra experiencia',d.experiencia)}
     </dl>
-    <div class="dg"><h4><span>📎 Documentación · ${de.exento ? 'no requiere (en actividad)' : de.ok+' de '+de.tot}</span>${docs.length?`<button class="btn sm ghost" id="bZip" onclick="bajarZip('${d.id}')">⬇ Descargar todo</button>`:''}</h4>
+    <div class="dg"><h4><span>📎 Documentación · ${de.exento ? 'no requiere (en actividad)' : de.ok+' de '+de.tot}</span></h4>
       <div class="chkl">${CHECK.map(c=>`<div class="${de.tiene.has(c.id)?'si':'no'}"><i>${de.tiene.has(c.id)?'✓':'·'}</i>${c.t}${de.tiene.has(c.id)?'':' — pendiente'}</div>`).join('')}</div>
       ${de.falta.length?`<a class="btn sm ghost" style="margin-bottom:10px" target="_blank" href="https://wa.me/${waNum(d.telefono)}?text=${encodeURIComponent(`Hola ${d.nombre.split(' ')[0]}, te escribimos de la Secretaría Académica del DCFyCCCO por el Registro Docente 2027. Te falta presentar: ${de.falta.map(c=>CAT_CORTO[c.id]).join(', ')}. Por favor, acercala a la Secretaría Académica indicando tu número de registro #${pad(d.nro)}. Muchas gracias.`)}">💬 Pedir lo pendiente por WhatsApp</a>`:''}
       ${grupos.length ? grupos.map(g => `<div style="font:600 12px Inter;color:var(--mut);margin:10px 0 6px">${g.c.ico} ${g.c.t}</div>
@@ -1195,23 +1204,131 @@ async function abrirDoc(path){
   if(u) window.open(u, '_blank'); else toast('No se pudo abrir el archivo');
 }
 
-async function bajarZip(id){
-  const d = DATA.find(x=>x.id===id), b = $('#bZip');
+const baseNombre = d => `${pad(d.nro)}_${limpio((d.apellido||'').toUpperCase())}_${limpio(d.nombre||'')}`;
+async function bajarZip(id, conFicha=false){
+  const d = DATA.find(x=>x.id===id), b = $(conFicha ? '#bLeg' : '#bZip'), txt = b.textContent;
   b.disabled = true; b.textContent = 'Preparando…';
   try{
-    const zip = new JSZip(), cuenta = {};
-    for(const x of d.docs){
-      const u = URLS[x.path] || (await sb.storage.from(BUCKET).createSignedUrl(x.path, 3600)).data?.signedUrl;
+    const zip = new JSZip(), cuenta = {}, raiz = conFicha ? zip.folder(baseNombre(d)) : zip;
+    if(conFicha) raiz.file(`${baseNombre(d)}_ficha.pdf`, await fichaBlob(d));
+    const docs = d.docs || [];
+    const urls = docs.length ? await firmar(docs.map(x=>x.path)) : {};
+    const carp = conFicha ? raiz.folder('Documentacion') : raiz;
+    for(const x of docs){
+      const u = urls[x.path] || URLS[x.path];
+      if(!u) continue;
       const blob = await (await fetch(u)).blob();
       cuenta[x.cat] = (cuenta[x.cat]||0)+1;
       const ext = (x.nombre.match(/\.\w+$/)||[x.tipo==='application/pdf'?'.pdf':'.jpg'])[0];
-      zip.folder(CAT_TXT[x.cat]||'Otros').file(`${CAT_TXT[x.cat]||'Doc'} ${cuenta[x.cat]}${ext}`, blob);
+      carp.folder(ZIPN[x.cat]||'Otros').file(`${(ZIPN[x.cat]||'Documento').replace(/^\d_/,'')}_${cuenta[x.cat]}${ext}`, blob);
     }
     const out = await zip.generateAsync({type:'blob'});
-    const a = document.createElement('a'); a.href = URL.createObjectURL(out);
-    a.download = `${pad(d.nro)}_${limpio(d.apellido)}_${limpio(d.nombre)}_documentacion.zip`; a.click();
-  }catch(e){ console.error(e); toast('No se pudo descargar la documentación'); }
-  b.disabled = false; b.textContent = '⬇ Descargar todo';
+    descargar(out, `${baseNombre(d)}_${conFicha?'legajo':'documentacion'}.zip`);
+  }catch(e){ console.error(e); toast('No se pudo preparar la descarga'); }
+  b.disabled = false; b.textContent = txt;
+}
+
+/* ---------- ficha del docente (PDF) ---------- */
+const H2P = 'https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.10.1/html2pdf.bundle.min.js';
+function cargarLib(url){
+  return new Promise((res, rej) => {
+    if(window.html2pdf) return res();
+    const s = document.createElement('script'); s.src = url; s.onload = res; s.onerror = rej; document.head.appendChild(s);
+  });
+}
+function fichaHTML(d){
+  const esc2 = v => esc(v ?? '');
+  const escs = [...document.querySelectorAll('.bar .esc img')].slice(0,2).map(i=>i.src);
+  const f = (t,v) => v ? `<div class="fx-f"><span>${t}</span><b>${esc2(v)}</b></div>` : '';
+  const sec = (t,cont) => cont.trim() ? `<div class="fx-sec"><h4>${t}</h4><div class="fx-g">${cont}</div></div>` : '';
+  const de = docEstado(d);
+  const mats = (d.materias||'').split(';').map(x=>x.trim()).filter(Boolean);
+  const k = condK(d.condicion_docente);
+  const kc = {actual:'#16A34A', anterior:'#D97706', primera:'#2563EB'}[k] || '#0F8F8A';
+  const docsHtml = de.exento
+    ? '<p class="fx-p">No corresponde: personal policial en actividad.</p>'
+    : `<div class="fx-chk">${CHECK.map(c=>`<div class="${de.tiene.has(c.id)?'si':'no'}"><i>${de.tiene.has(c.id)?'✓':'—'}</i>${c.t}</div>`).join('')}</div>`;
+  return `<div class="fx">
+  <style>
+    .fx{width:794px;min-height:1123px;background:#fff;color:#0B2A33;font-family:"Plus Jakarta Sans",Arial,sans-serif;position:relative}
+    .fx *{box-sizing:border-box;margin:0;padding:0}
+    .fx-hd{background:linear-gradient(135deg,#0E3A45,#071F26);color:#fff;padding:28px 40px 26px;display:flex;align-items:center;gap:18px;position:relative;overflow:hidden}
+    .fx-hd::after{content:"";position:absolute;right:-60px;top:-80px;width:260px;height:260px;border-radius:50%;background:radial-gradient(circle,rgba(34,201,195,.35),transparent 65%)}
+    .fx-hd img{height:58px}
+    .fx-hd .t{flex:1}
+    .fx-hd .k{font-size:10.5px;font-weight:800;letter-spacing:.2em;text-transform:uppercase;color:#5EE0D9}
+    .fx-hd .n{font-size:17px;font-weight:700;margin-top:3px}
+    .fx-hd .s{font-size:11.5px;color:rgba(255,255,255,.7);margin-top:2px}
+    .fx-nro{position:relative;z-index:1;text-align:right;background:#22C9C3;color:#06222A;border-radius:12px;padding:8px 14px}
+    .fx-nro span{display:block;font-size:9.5px;font-weight:800;letter-spacing:.16em;text-transform:uppercase}
+    .fx-nro b{font-size:24px;font-weight:800;letter-spacing:-.02em}
+    .fx-bd{padding:26px 40px 70px}
+    .fx-tit{font-size:11px;font-weight:800;letter-spacing:.2em;text-transform:uppercase;color:#0F8F8A}
+    .fx-nm{font-size:30px;font-weight:800;letter-spacing:-.02em;margin-top:4px;line-height:1.15}
+    .fx-pills{display:flex;gap:8px;margin-top:10px;flex-wrap:wrap}
+    .fx-pills span{font-size:11px;font-weight:800;letter-spacing:.06em;text-transform:uppercase;padding:5px 11px;border-radius:99px;background:#E6F6F5;color:#0B4F55}
+    .fx-sec{margin-top:20px;border:1px solid #D7ECEB;border-radius:14px;overflow:hidden;page-break-inside:avoid}
+    .fx-sec h4{font-size:11px;font-weight:800;letter-spacing:.16em;text-transform:uppercase;color:#fff;background:#0E4552;padding:9px 16px}
+    .fx-g{display:grid;grid-template-columns:1fr 1fr;gap:10px 22px;padding:14px 16px}
+    .fx-f span{display:block;font-size:9.5px;font-weight:800;letter-spacing:.12em;text-transform:uppercase;color:#5B7479}
+    .fx-f b{display:block;font-size:13px;font-weight:600;margin-top:2px;white-space:pre-wrap;word-break:break-word}
+    .fx-full{grid-column:1/-1}
+    .fx-p{grid-column:1/-1;font-size:13px;line-height:1.5;white-space:pre-wrap}
+    .fx-mat{grid-column:1/-1;display:flex;flex-wrap:wrap;gap:6px}
+    .fx-mat span{font-size:12px;font-weight:700;padding:5px 11px;border-radius:99px;background:#F0FAF9;border:1px solid #BFE6E3;color:#0B4F55}
+    .fx-chk{grid-column:1/-1;display:grid;grid-template-columns:1fr 1fr;gap:6px 18px}
+    .fx-chk div{display:flex;gap:8px;align-items:center;font-size:12.5px}
+    .fx-chk i{font-style:normal;width:18px;height:18px;border-radius:50%;display:inline-grid;place-items:center;font-size:10px;font-weight:800;flex:none}
+    .fx-chk .si i{background:#16A34A;color:#fff}
+    .fx-chk .no{color:#8A9EA2}
+    .fx-chk .no i{background:#E5EEEE;color:#8A9EA2}
+    .fx-q{margin-top:22px;padding:12px 16px;border-left:4px solid #22C9C3;background:#F0FAF9;border-radius:0 10px 10px 0;font-size:13px;font-weight:700}
+    .fx-q span{color:#0F8F8A}
+    .fx-ft{position:absolute;left:40px;right:40px;bottom:24px;display:flex;justify-content:space-between;font-size:10px;color:#7C9195;border-top:1px solid #E1EEEE;padding-top:10px}
+  </style>
+  <div class="fx-hd">${escs.map(s=>`<img src="${s}">`).join('')}
+    <div class="t"><div class="k">Ficha del docente · Registro Docente 2027</div><div class="n">Secretaría Académica · DCFyCCCO</div><div class="s">Departamento Centro de Formación y Capacitación Cutral-Có – Plaza Huincul</div></div>
+    <div class="fx-nro"><span>Registro</span><b>#${pad(d.nro)}</b></div>
+  </div>
+  <div class="fx-bd">
+    <div class="fx-tit">Escuela de Agentes de Seguridad · Ciclo lectivo 2027</div>
+    <div class="fx-nm">${esc2((d.apellido||'').toUpperCase())}, ${esc2(d.nombre)}</div>
+    <div class="fx-pills"><span>${SIT_TXT[d.situacion]||''}</span>${d.condicion_docente?`<span style="background:${kc}1A;color:${kc}">${COND_TXT[d.condicion_docente]}</span>`:''}<span>Estado: ${EST_TXT[d.estado]||d.estado}</span></div>
+    ${sec('Datos personales', f('D.N.I.',d.dni)+f('Fecha de nacimiento',d.fecha_nac?`${fDia(d.fecha_nac)} (${edad(d.fecha_nac)} años)`:'')+f('Domicilio',d.domicilio)+f('Localidad',d.ciudad)+f('Teléfono / WhatsApp',d.telefono)+f('Correo electrónico',d.email))}
+    ${sec('Situación y datos laborales', f('Situación',SIT_TXT[d.situacion])+f('Jerarquía',d.jerarquia)+f('L.P. N°',d.lp)+f(d.situacion==='actividad'?'Unidad':'Lugar laboral',d.unidad)+f('Domicilio laboral',d.unidad_domicilio)+f('Fecha de ingreso',fDia(d.fecha_ingreso))+f('Cargo o función',d.cargo)+f('Horario',d.horario))}
+    ${sec('Experiencia docente', f('En la Escuela',COND_TXT[d.condicion_docente])+f('Materia/s que dicta',d.materia_actual)+(d.experiencia?`<div class="fx-f fx-full"><span>Otra experiencia docente</span><b>${esc2(d.experiencia)}</b></div>`:''))}
+    ${mats.length?sec('Materias de interés para 2027', `<div class="fx-mat">${mats.map(m=>`<span>${esc2(m)}</span>`).join('')}</div>`):''}
+    ${sec('Formación', (d.titulo?`<div class="fx-f fx-full"><span>Último título</span><b>${esc2(d.titulo)}</b></div>`:'')+(d.cursos?`<div class="fx-f fx-full"><span>Cursos realizados</span><b>${esc2(d.cursos)}</b></div>`:''))}
+    ${sec('Documentación presentada', docsHtml)}
+    ${d.observaciones?sec('Opinión y/u observaciones del docente', `<p class="fx-p">${esc2(d.observaciones)}</p>`):''}
+    ${d.notas?sec('Notas internas de la Secretaría Académica', `<p class="fx-p">${esc2(d.notas)}</p>`):''}
+    <div class="fx-q">Detrás de cada Agente de Seguridad, <span>hay un docente que lo formó.</span></div>
+  </div>
+  <div class="fx-ft"><span>Registrado el ${fmtFecha(d.creado)} · Generado el ${fmtFecha(new Date())}</span><span>Uso interno · Secretaría Académica DCFyCCCO</span></div>
+</div>`;
+}
+async function fichaBlob(d){
+  await cargarLib(H2P);
+  const w = document.createElement('div');
+  w.style.cssText = 'position:absolute;left:0;top:0;z-index:-5;pointer-events:none';
+  w.innerHTML = fichaHTML(d);
+  document.body.appendChild(w);
+  try{
+    await document.fonts?.ready;
+    return await html2pdf().set({
+      margin:0, image:{type:'jpeg', quality:.96},
+      html2canvas:{scale:2, backgroundColor:'#ffffff', useCORS:true, scrollY:0, scrollX:0},
+      jsPDF:{unit:'mm', format:'a4', orientation:'portrait'},
+      pagebreak:{mode:['css','legacy'], avoid:'.fx-sec'}
+    }).from(w.firstElementChild).outputPdf('blob');
+  } finally { w.remove(); }
+}
+async function bajarFicha(id){
+  const d = DATA.find(x=>x.id===id), b = $('#bFicha'), txt = b.textContent;
+  b.disabled = true; b.textContent = 'Generando…';
+  try{ descargar(await fichaBlob(d), `${baseNombre(d)}_ficha.pdf`); }
+  catch(e){ console.error(e); toast('No se pudo generar la ficha'); }
+  b.disabled = false; b.textContent = txt;
 }
 
 async function guardar(id){
@@ -1352,7 +1469,7 @@ async function bajarTodo(){
             const blob = await (await fetch(urls[x.path])).blob();
             cuenta[x.cat] = (cuenta[x.cat]||0)+1;
             const ext = (x.nombre.match(/\.\w+$/)||[x.tipo==='application/pdf'?'.pdf':'.jpg'])[0];
-            carp.file(`${CAT_CORTO[x.cat]||'Documento'} ${cuenta[x.cat]}${ext}`, blob);
+            carp.file(`${(ZIPN[x.cat]||'Documento')}_${cuenta[x.cat]}${ext}`, blob);
           }catch(e){ fallas++; }
         }
       }

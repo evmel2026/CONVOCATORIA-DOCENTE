@@ -1,5 +1,5 @@
 // Base Docente · DCFyCCCO — service worker (permite instalar el panel como app)
-const CACHE = 'base-docente-v1.9.1';
+const CACHE = 'base-docente-v1.9.2';
 const BASE = ['panel.html', 'manifest.webmanifest', 'icon-192.png', 'icon-512.png', 'config.js'];
 self.addEventListener('install', e => {
   self.skipWaiting();
