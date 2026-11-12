@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
-<meta name="version" content="1.8.0">
+<meta name="version" content="1.8.1">
 <meta name="theme-color" content="#07070D">
 <meta name="description" content="Registro Docente 2027 · Escuela de Agentes de Seguridad · DCFyCCCO">
 <title>Base Docente · DCFyCCCO</title>
@@ -439,7 +439,7 @@ footer{text-align:center;color:var(--mut);font-size:12px;margin-top:40px}
       <p>Las siguientes condiciones rigen para todo el cuerpo docente de la Escuela durante el ciclo lectivo 2027.</p></div>
     <div class="saber">
       <div class="sb"><div class="big">01</div><div class="n">🗣️</div><h3>Entrevista personal</h3>
-        <p>Los postulantes serán convocados por la Secretaría Académica a una <b>entrevista personal</b>.</p></div>
+        <p>La Secretaría Académica coordinará con cada docente registrado una <b>entrevista personal</b>.</p></div>
       <div class="sb"><div class="big">02</div><div class="n">✍️</div><h3>Contrato y acta acuerdo</h3>
         <p>Los docentes que continúan y quienes se incorporan suscribirán el <b>contrato</b> y el <b>acta acuerdo</b> correspondientes.</p></div>
       <div class="sb"><div class="big">03</div><div class="n">🗓️</div><h3>Planificación semanal</h3>
@@ -447,7 +447,7 @@ footer{text-align:center;color:var(--mut);font-size:12px;margin-top:40px}
       <div class="sb"><div class="big">04</div><div class="n">🤝</div><h3>Jornadas institucionales</h3>
         <p>El cuerpo docente participará de <b>jornadas periódicas de trabajo</b> a cargo del Jefe de la Secretaría Académica del DCFyCCCO, junto con personal del Departamento.</p></div>
     </div>
-    <div class="nota">La Secretaría Académica analizará cada registro y se comunicará con los postulantes para coordinar las instancias siguientes.</div>
+    <div class="nota">La Secretaría Académica analizará cada registro y se comunicará con cada docente para coordinar las instancias siguientes.</div>
 
     <div class="sec-t"><div class="k">Documentación</div><h2>Qué vas a necesitar</h2><p>PDF o foto sacada con el celular · máximo 10 MB por archivo.</p></div>
     <div id="docInfo"></div>
@@ -929,7 +929,7 @@ function armarResumen(){
   const pend = CHECK.filter(c=>!BOX.r[c.id].length).map(c=>CAT_CORTO[c.id]);
   const fila = (t,x) => x ? `<dt>${t}</dt><dd>${esc(x)}</dd>` : '';
   $('#resumen').innerHTML =
-    fila('Postulante', `${v('apellido').toUpperCase()}, ${v('nombre')}`) + fila('D.N.I.', v('dni')) +
+    fila('Docente', `${v('apellido').toUpperCase()}, ${v('nombre')}`) + fila('D.N.I.', v('dni')) +
     fila('Nacimiento', `${fDia(v('fecha_nac'))} (${edad(v('fecha_nac'))} años)`) +
     fila('Domicilio', `${v('domicilio')} · ${v('ciudad')}`) +
     fila('Situación', [SIT_TXT[s], s!=='civil'?v('jerarquia'):'', v('lp')?'L.P. '+v('lp'):''].filter(Boolean).join(' · ')) +
