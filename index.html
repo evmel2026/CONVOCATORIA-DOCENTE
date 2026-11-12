@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
-<meta name="version" content="1.7.1">
+<meta name="version" content="1.8.0">
 <meta property="og:type" content="website">
 <meta property="og:title" content="Registro Docente 2027 · DCFyCCCO">
 <meta property="og:description" content="Sumate a la base de datos docente de la Escuela de Agentes de Seguridad. Personal policial en actividad, retirado y civiles.">
@@ -294,6 +294,45 @@ footer{text-align:center;color:var(--mut);font-size:12px;margin-top:40px}
 .chkl .no i{background:var(--line2);color:var(--mut)}
 .dok{color:var(--ok);font-weight:700}
 
+/* ciclo 2027 */
+.ciclo{display:grid;grid-template-columns:repeat(4,1fr);gap:10px;margin-bottom:12px}
+@media(max-width:620px){.ciclo{grid-template-columns:1fr 1fr}}
+.ciclo div{background:var(--card);border:1px solid var(--cardb);border-radius:22px;padding:16px 16px 14px;box-shadow:var(--sh);backdrop-filter:blur(14px)}
+.ciclo b{display:block;font-weight:800;font-size:32px;line-height:1;letter-spacing:-.04em;background:var(--hl);-webkit-background-clip:text;background-clip:text;color:transparent}
+[data-mode=light] .ciclo b{background:var(--grad);-webkit-background-clip:text;background-clip:text}
+.ciclo span{display:block;font-size:13px;color:var(--mut);margin-top:6px;font-weight:600;line-height:1.3}
+/* selector de materias */
+.ms .ms-btn{width:100%;display:flex;justify-content:space-between;align-items:center;gap:10px;font:500 15px "Plus Jakarta Sans",sans-serif;color:var(--tx);background:var(--field);border:1.5px solid var(--line);border-radius:16px;padding:14px 16px;cursor:pointer;text-align:left}
+.ms .ms-btn.open{border-color:var(--accline);box-shadow:0 0 0 4px var(--accs)}
+.ms .ms-btn i{font-style:normal;transition:.2s;color:var(--mut)}
+.ms .ms-btn.open i{transform:rotate(180deg)}
+.ms.bad .ms-btn{border-color:var(--err);box-shadow:0 0 0 4px var(--errs)}
+.ms-pop{margin-top:8px;background:var(--bg2);border:1px solid var(--line2);border-radius:18px;padding:8px;box-shadow:var(--sh)}
+.ms-list{max-height:360px;overflow:auto;display:flex;flex-direction:column;gap:2px}
+.ms-list label{display:flex;gap:12px;align-items:center;padding:11px 12px;border-radius:12px;cursor:pointer;font-size:14.5px;font-weight:600;color:var(--ink)}
+.ms-list label:hover{background:var(--field)}
+.ms-list input{width:19px;height:19px;accent-color:var(--c2);flex:none}
+.ms-list label:has(input:checked){background:var(--accs)}
+.ms-ft{display:flex;justify-content:space-between;align-items:center;gap:10px;padding:10px 6px 4px;border-top:1px solid var(--line);margin-top:6px;font-size:13px;color:var(--mut)}
+.ms-chips{display:flex;flex-wrap:wrap;gap:6px;margin-top:10px}
+.ms-chips:empty{display:none}
+.ms-chips span{display:inline-flex;align-items:center;gap:4px;background:var(--accs);border:1px solid var(--accline);color:var(--ink);font-size:13px;font-weight:600;padding:5px 5px 5px 12px;border-radius:99px}
+.ms-chips button{border:0;background:none;color:var(--mut);cursor:pointer;font-size:16px;line-height:1;width:24px;height:24px;border-radius:50%}
+.ms-chips button:hover{color:var(--err)}
+/* experiencia docente (colores) */
+.k-actual{--kc:#22C55E} .k-anterior{--kc:#F59E0B} .k-primera{--kc:#60A5FA}
+.chip .dot{display:inline-block;width:10px;height:10px;border-radius:50%;background:var(--kc);margin-right:8px;vertical-align:1px;box-shadow:0 0 0 3px color-mix(in srgb,var(--kc) 25%,transparent)}
+.p-actual{background:rgba(34,197,94,.15);color:#22C55E}
+.p-anterior{background:rgba(245,158,11,.16);color:#E8950B}
+.p-primera{background:rgba(96,165,250,.16);color:#4F95F5}
+.pc.k-actual,.pc.k-anterior,.pc.k-primera{border-left:5px solid var(--kc)}
+.cfil{display:flex;flex-wrap:wrap;gap:8px;margin-bottom:12px}
+.cfil button{display:inline-flex;align-items:center;gap:8px;border:1.5px solid var(--line2);background:var(--card);color:var(--ink);font:700 13px "Plus Jakarta Sans",sans-serif;padding:8px 14px;border-radius:99px;cursor:pointer;transition:.15s}
+.cfil button i{width:10px;height:10px;border-radius:50%;background:var(--kc,var(--mut))}
+.cfil button b{font-weight:800;color:var(--mut)}
+.cfil button.on{border-color:var(--kc,var(--ink));background:color-mix(in srgb,var(--kc,var(--c2)) 16%,transparent)}
+.sub{grid-column:1/-1;font-weight:800;font-size:13px;letter-spacing:.06em;text-transform:uppercase;color:var(--mut);margin:10px 0 -2px}
+
 /* ===== PANEL ===== */
 .top{display:flex;align-items:center;justify-content:space-between;gap:12px;flex-wrap:wrap;margin:6px 0 18px}
 .top h1{font-size:32px;line-height:1.05}
@@ -307,7 +346,7 @@ footer{text-align:center;color:var(--mut);font-size:12px;margin-top:40px}
 .stat span{font-size:11px;color:var(--mut);text-transform:uppercase;letter-spacing:.08em;font-weight:700}
 .stat:first-child{background:var(--grad);border-color:transparent;box-shadow:var(--glow)}
 .stat:first-child b,.stat:first-child span{color:#fff}
-.tools{display:grid;grid-template-columns:2fr 1fr 1fr 1fr 1fr 1fr;gap:10px;margin-bottom:14px}
+.tools{display:grid;grid-template-columns:1.6fr 1fr 1.4fr 1fr 1fr 1fr;gap:10px;margin-bottom:14px}
 @media(max-width:900px){.tools{grid-template-columns:1fr 1fr}.tools .q{grid-column:1/-1}}
 .list{display:grid;grid-template-columns:repeat(auto-fill,minmax(330px,1fr));gap:12px}
 @media(max-width:420px){.list{grid-template-columns:1fr}}
@@ -373,42 +412,51 @@ footer{text-align:center;color:var(--mut);font-size:12px;margin-top:40px}
       </div>
       <div><div class="badge" id="badge"><i></i> Registro abierto</div></div>
       <h1>Registro<br>Docente <span class="hlt">2027</span></h1>
-      <p class="lead">Estamos conformando la base de datos docente de la Escuela de Agentes de Seguridad. Si te interesa dictar clases, dejanos tus datos y tu documentación: así contamos con opciones al momento de conformar el plantel de cada ciclo lectivo.</p>
+      <p class="lead">La Secretaría Académica del DCFyCCCO convoca al personal policial en actividad, al personal en situación de retiro y a profesionales civiles a integrar el Registro Docente de la Escuela de Agentes de Seguridad para el ciclo lectivo 2027. Completá tus datos, tus antecedentes y tu documentación para participar de la conformación del cuerpo docente.</p>
       <div id="cfgMsg" style="margin-top:18px"></div>
       <div class="cta" id="cta1">
-        <button class="btn lg" onclick="empezar()">Sumarme al registro <span class="ar">→</span></button>
-        <small>Lleva unos 10 minutos</small>
+        <button class="btn lg" onclick="empezar()">Completar mi registro <span class="ar">→</span></button>
+        <small>Tiempo estimado: 10 minutos</small>
       </div>
       <div style="margin-top:14px;color:var(--herom)">¿Ya te registraste? <button class="linkc" onclick="abrirCompletar()">Completar documentación</button></div>
     </header>
 
-    <div class="sec-t"><div class="k">Quiénes pueden sumarse</div><h2>Abierto a personal policial y civil</h2></div>
+    <div class="sec-t"><div class="k">Destinatarios</div><h2>Personal policial y profesionales civiles</h2></div>
     <div class="perf">
       <span><i>👮</i>Personal policial en actividad</span>
       <span><i>🎖️</i>Personal policial retirado</span>
-      <span><i>👤</i>Civiles</span>
+      <span><i>👤</i>Profesionales civiles</span>
     </div>
 
-    <div class="sec-t"><div class="k">Lo que tenés que saber</div><h2>Si sos convocado/a para dictar clases</h2>
-      <p>Te contamos cómo se trabaja en la Escuela, para que puedas evaluar si te interesa.</p></div>
+    <div class="sec-t"><div class="k">Ciclo lectivo 2027</div><h2>Formación de Aspirantes a Agentes de Seguridad</h2>
+      <p>El cuerpo docente cumple un rol central en la formación de los futuros Agentes de Seguridad. Cada docente es parte fundamental del proceso formativo.</p></div>
+    <div class="ciclo">
+      <div><b>9</b><span>meses de cursado</span></div>
+      <div><b>350</b><span>aspirantes aprox.</span></div>
+      <div><b>10</b><span>secciones</span></div>
+      <div><b>AM · PM</b><span>turnos mañana y/o tarde</span></div>
+    </div>
+
+    <div class="sec-t" style="margin-top:34px"><div class="k">Condiciones</div><h2>Ejercicio de la función docente</h2>
+      <p>Las siguientes condiciones rigen para todo el cuerpo docente de la Escuela durante el ciclo lectivo 2027.</p></div>
     <div class="saber">
       <div class="sb"><div class="big">01</div><div class="n">🗣️</div><h3>Entrevista personal</h3>
-        <p>Cuando surja la necesidad de cubrir una materia, la Secretaría Académica se comunicará para coordinar una entrevista.</p></div>
+        <p>Los postulantes serán convocados por la Secretaría Académica a una <b>entrevista personal</b>.</p></div>
       <div class="sb"><div class="big">02</div><div class="n">✍️</div><h3>Contrato y acta acuerdo</h3>
-        <p>Tanto los <b>docentes que continúan</b> como los <b>nuevos</b> deberán firmar el contrato y el acta acuerdo correspondientes.</p></div>
+        <p>Los docentes que continúan y quienes se incorporan suscribirán el <b>contrato</b> y el <b>acta acuerdo</b> correspondientes.</p></div>
       <div class="sb"><div class="big">03</div><div class="n">🗓️</div><h3>Planificación semanal</h3>
-        <p>Una vez firmado, cada docente deberá enviar <b>todas las semanas</b> la planificación de sus clases a la Secretaría Académica.</p></div>
-      <div class="sb"><div class="big">04</div><div class="n">🤝</div><h3>Jornadas periódicas</h3>
-        <p>Se realizarán jornadas de trabajo a cargo del Jefe de la Secretaría Académica del DCFyCCCO, en conjunto con personal del Departamento.</p></div>
+        <p>Cada docente remitirá <b>semanalmente</b> a la Secretaría Académica la planificación de sus clases.</p></div>
+      <div class="sb"><div class="big">04</div><div class="n">🤝</div><h3>Jornadas institucionales</h3>
+        <p>El cuerpo docente participará de <b>jornadas periódicas de trabajo</b> a cargo del Jefe de la Secretaría Académica del DCFyCCCO, junto con personal del Departamento.</p></div>
     </div>
-    <div class="nota">Formar parte del registro no implica una designación. Nos permite contar con una base de docentes para convocar según las necesidades de cada ciclo lectivo.</div>
+    <div class="nota">La Secretaría Académica analizará cada registro y se comunicará con los postulantes para coordinar las instancias siguientes.</div>
 
     <div class="sec-t"><div class="k">Documentación</div><h2>Qué vas a necesitar</h2><p>PDF o foto sacada con el celular · máximo 10 MB por archivo.</p></div>
     <div id="docInfo"></div>
 
     <div class="endcta" id="cta2">
-      <div><h3>¿Te interesa dictar clases?</h3><p>Completá tus datos y quedás en la base docente.</p></div>
-      <div style="display:flex;flex-direction:column;align-items:flex-start;gap:10px"><button class="btn dark lg" onclick="empezar()">Sumarme al registro <span class="ar">→</span></button>
+      <div><h3>Formá parte del cuerpo docente 2027</h3><p>Completá el registro con tus datos y tu documentación.</p></div>
+      <div style="display:flex;flex-direction:column;align-items:flex-start;gap:10px"><button class="btn dark lg" onclick="empezar()">Completar mi registro <span class="ar">→</span></button>
       <button class="linkc" style="color:#fff" onclick="abrirCompletar()">¿Ya te registraste? Completar documentación</button></div>
     </div>
   </section>
@@ -422,45 +470,66 @@ footer{text-align:center;color:var(--mut);font-size:12px;margin-top:40px}
     <form id="frm" novalidate onsubmit="return false">
 
       <div class="card st" data-step="0">
-        <div class="st-h"><span class="k">1</span><div><h2>Datos personales</h2><p>Para identificarte y poder contactarte.</p></div></div>
+        <div class="st-h"><span class="k">1</span><div><h2>Datos personales</h2><p>Completá tus datos tal como figuran en tu documento.</p></div></div>
         <div class="grid">
-          <label class="f"><span>Apellido <b>*</b></span><input name="apellido" autocomplete="family-name"></label>
-          <label class="f"><span>Nombre/s <b>*</b></span><input name="nombre" autocomplete="given-name"></label>
-          <label class="f"><span>DNI <b>*</b></span><input name="dni" inputmode="numeric" placeholder="Sin puntos"></label>
+          <label class="f"><span>Apellido/s completo/s <b>*</b></span><input name="apellido" autocomplete="family-name"></label>
+          <label class="f"><span>Nombre/s completo/s <b>*</b></span><input name="nombre" autocomplete="given-name"></label>
+          <label class="f"><span>D.N.I. <b>*</b></span><input name="dni" inputmode="numeric" placeholder="Sin puntos"></label>
+          <label class="f"><span>Fecha de nacimiento <b>*</b></span><input name="fecha_nac" type="date" max="2010-12-31"></label>
+          <label class="f full"><span>Domicilio actual <b>*</b></span><input name="domicilio" autocomplete="street-address" placeholder="Calle, número, barrio"></label>
+          <label class="f"><span>Localidad <b>*</b></span><input name="ciudad" list="ciudades" placeholder="Ej.: Cutral-Có"></label>
           <label class="f"><span>Teléfono / WhatsApp <b>*</b></span><input name="telefono" inputmode="tel" placeholder="299 4 123456"></label>
-          <label class="f"><span>Correo electrónico</span><input name="email" type="email" autocomplete="email"></label>
-          <label class="f"><span>Ciudad donde vive <b>*</b></span><input name="ciudad" list="ciudades" placeholder="Ej.: Cutral-Có"></label>
+          <label class="f full"><span>Correo electrónico</span><input name="email" type="email" autocomplete="email"></label>
         </div>
         <datalist id="ciudades"><option>Cutral-Có</option><option>Plaza Huincul</option><option>Neuquén</option><option>Zapala</option><option>Plottier</option><option>Senillosa</option><option>Centenario</option><option>Picún Leufú</option><option>Challacó</option><option>Las Lajas</option><option>Piedra del Águila</option></datalist>
       </div>
 
       <div class="card st hidden" data-step="1">
-        <div class="st-h"><span class="k">2</span><div><h2>Situación actual</h2><p>Contanos tu situación y si ya dictaste clases en la Escuela.</p></div></div>
+        <div class="st-h"><span class="k">2</span><div><h2>Situación y datos laborales</h2><p>Indicá tu situación actual y tu lugar de trabajo.</p></div></div>
         <div class="lbl">Situación <b>*</b></div>
         <div class="chips" id="sitChips">
           <label class="chip"><input type="radio" name="situacion" value="actividad"><strong>En actividad</strong><em>Personal policial</em></label>
           <label class="chip"><input type="radio" name="situacion" value="retirado"><strong>Retirado/a</strong><em>Personal policial</em></label>
-          <label class="chip"><input type="radio" name="situacion" value="civil"><strong>Civil</strong><em>Personal civil</em></label>
+          <label class="chip"><input type="radio" name="situacion" value="civil"><strong>Civil</strong><em>Profesional civil</em></label>
         </div>
         <div class="grid hidden" id="sitCampos" style="margin-top:16px">
-          <label class="f"><span>LP <small style="font-weight:500;color:var(--mut)">(si tenés)</small></span><input name="lp"></label>
-          <label class="f pol"><span>Jerarquía</span><input name="jerarquia" placeholder="Ej.: Sargento"></label>
-          <label class="f full"><span id="lblUnidad">Unidad o lugar donde presta servicio</span><input name="unidad"></label>
-        </div>
-        <div class="lbl">¿Dictaste clases en la Escuela durante 2026? <b>*</b></div>
-        <div class="chips two" id="condChips">
-          <label class="chip"><input type="radio" name="condicion_docente" value="continua"><strong>Sí</strong><em>Me interesa continuar en 2027</em></label>
-          <label class="chip"><input type="radio" name="condicion_docente" value="nuevo"><strong>No</strong><em>Sería mi primera vez</em></label>
+          <label class="f pol"><span id="lblJer">Jerarquía</span><input name="jerarquia" placeholder="Ej.: Sargento"></label>
+          <label class="f"><span>L.P. N° <small style="font-weight:500;color:var(--mut)">(si corresponde)</small></span><input name="lp"></label>
+          <div class="sub">Datos laborales</div>
+          <label class="f full"><span id="lblUnidad">Unidad donde presta servicio o lugar laboral</span><input name="unidad"></label>
+          <label class="f full"><span id="lblUDom">Domicilio de la unidad o lugar laboral</span><input name="unidad_domicilio" placeholder="Calle, número, localidad"></label>
+          <label class="f"><span id="lblFIng">Fecha de ingreso</span><input name="fecha_ingreso" type="date"></label>
+          <label class="f"><span id="lblCargo">Cargo o función que ocupa</span><input name="cargo"></label>
+          <label class="f full"><span id="lblHor">Horario que cumple</span><input name="horario" placeholder="Ej.: lunes a viernes de 7 a 14 h"></label>
         </div>
       </div>
 
       <div class="card st hidden" data-step="2">
-        <div class="st-h"><span class="k">3</span><div><h2>Formación e interés</h2><p>Tu formación y las materias que te gustaría dictar.</p></div></div>
-        <div class="grid">
+        <div class="st-h"><span class="k">3</span><div><h2>Experiencia y materias</h2><p>Tu experiencia en la Escuela y las materias que te interesa dictar.</p></div></div>
+        <div class="lbl">Experiencia docente en la Escuela <b>*</b></div>
+        <div class="chips" id="condChips">
+          <label class="chip k-actual"><input type="radio" name="condicion_docente" value="actual"><strong><span class="dot"></span>Actualmente dicto clases</strong><em>Ciclo lectivo en curso</em></label>
+          <label class="chip k-anterior"><input type="radio" name="condicion_docente" value="anterior"><strong><span class="dot"></span>Dicté clases en años anteriores</strong><em>No en el ciclo actual</em></label>
+          <label class="chip k-primera"><input type="radio" name="condicion_docente" value="primera"><strong><span class="dot"></span>Es mi primera vez</strong><em>Nunca dicté clases en la Escuela</em></label>
+        </div>
+        <div class="grid" style="margin-top:16px">
+          <label class="f full hidden" id="matActWrap"><span>Materia/s que dicta actualmente <b>*</b></span><input name="materia_actual" placeholder="Ej.: Defensa Policial"></label>
+          <div class="full">
+            <label class="f" style="margin-bottom:0"><span>Materia/s que le interesa dictar en 2027 <b>*</b></span></label>
+            <div class="ms" id="msMat">
+              <button type="button" class="ms-btn" id="msBtn" onclick="toggleMs()"><span id="msTxt">Seleccioná una o más materias</span><i>▾</i></button>
+              <div class="ms-pop hidden" id="msPop">
+                <div class="ms-list" id="msList"></div>
+                <div class="ms-ft"><span id="msCnt">Ninguna seleccionada</span><button type="button" class="btn sm dark" onclick="toggleMs(false)">Listo</button></div>
+              </div>
+              <div class="ms-chips" id="msChips"></div>
+            </div>
+          </div>
+          <label class="f full"><span>Otra propuesta <small style="font-weight:500;color:var(--mut)">(opcional)</small></span><input name="materia_otra" placeholder="Si te interesa otra materia o taller, indicalo acá"></label>
+          <div class="sub">Formación</div>
           <label class="f full"><span>Último título obtenido</span><input name="titulo" placeholder="Ej.: Profesor/a en Educación Física · Abogado/a · Téc. Sup. en Seguridad"></label>
           <label class="f full"><span>Cursos realizados</span><textarea name="cursos" placeholder="Cursos, capacitaciones o especializaciones"></textarea></label>
-          <label class="f full"><span>Materia/s que te interesa dictar <b>*</b></span><textarea name="materias" placeholder="Ej.: Derecho Penal, Tiro, Defensa Personal…"></textarea></label>
-          <label class="f full"><span>Experiencia docente</span><textarea name="experiencia" placeholder="Si ya dictaste clases: dónde, qué materias y durante cuánto tiempo"></textarea></label>
+          <label class="f full"><span>Otra experiencia docente</span><textarea name="experiencia" placeholder="Si dictaste clases en otras instituciones: dónde, qué materias y durante cuánto tiempo"></textarea></label>
         </div>
       </div>
 
@@ -472,14 +541,14 @@ footer{text-align:center;color:var(--mut);font-size:12px;margin-top:40px}
       <div class="card st hidden" data-step="4">
         <div class="st-h"><span class="k">5</span><div><h2>Confirmación</h2><p>Revisá tus datos antes de enviar.</p></div></div>
         <dl class="resumen" id="resumen"></dl>
-        <div class="lbl">En caso de ser convocado/a para dictar clases:</div>
+        <div class="lbl">Condiciones del ejercicio docente — ciclo lectivo 2027:</div>
         <div class="comp">
-          <div><i>1</i><span>Se coordinará una <b>entrevista personal</b>.</span></div>
-          <div><i>2</i><span>Deberé firmar el <b>contrato</b> y el <b>acta acuerdo</b>, tanto si continúo como si me incorporo por primera vez.</span></div>
-          <div><i>3</i><span>Deberé enviar <b>semanalmente la planificación</b> de mis clases a la Secretaría Académica.</span></div>
-          <div><i>4</i><span>Participaré de las <b>jornadas periódicas</b> a cargo del Jefe de la Secretaría Académica del DCFyCCCO, en conjunto con personal del Departamento.</span></div>
+          <div><i>1</i><span>Seré convocado/a a una <b>entrevista personal</b> con la Secretaría Académica.</span></div>
+          <div><i>2</i><span>Suscribiré el <b>contrato</b> y el <b>acta acuerdo</b> correspondientes, tanto si continúo como si me incorporo.</span></div>
+          <div><i>3</i><span>Remitiré <b>semanalmente la planificación</b> de mis clases a la Secretaría Académica.</span></div>
+          <div><i>4</i><span>Participaré de las <b>jornadas periódicas de trabajo</b> a cargo del Jefe de la Secretaría Académica del DCFyCCCO, junto con personal del Departamento.</span></div>
         </div>
-        <label class="check" id="chk1"><input type="checkbox" id="acepto1">Tomo conocimiento de las condiciones de trabajo detalladas.</label>
+        <label class="check" id="chk1"><input type="checkbox" id="acepto1">Tomo conocimiento de las condiciones del ejercicio docente para el ciclo lectivo 2027 (cursado de 9 meses, aproximadamente 350 aspirantes distribuidos en 10 secciones, turnos mañana y/o tarde).</label>
         <label class="check" id="chk2"><input type="checkbox" id="acepto2">Declaro que los datos y la documentación son verídicos y presto conformidad para su uso exclusivo por la Secretaría Académica del DCFyCCCO.</label>
       </div>
 
@@ -492,12 +561,12 @@ footer{text-align:center;color:var(--mut);font-size:12px;margin-top:40px}
 
   <section id="vOk" class="card done hidden">
     <div class="okc"><svg viewBox="0 0 24 24" fill="none" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12l5 5L20 7"/></svg></div>
-    <h2 style="font-size:30px">¡Ya formás parte del registro!</h2>
+    <h2 style="font-size:30px">Registro completado</h2>
     <p style="color:var(--mut);margin-top:6px">Tu número de registro es</p>
     <div class="nro" id="okNro">#0000</div>
     <p style="color:var(--mut);max-width:460px;margin:0 auto 20px" id="okTxt"></p>
     <div id="okPend"></div>
-    <div class="nota" style="text-align:left;max-width:460px;margin:0 auto 22px">Cuando surja la necesidad de cubrir una materia acorde a tu perfil, la Secretaría Académica se comunicará con vos.</div>
+    <div class="nota" style="text-align:left;max-width:460px;margin:0 auto 22px">La Secretaría Académica analizará tu registro y se comunicará con vos para coordinar la entrevista personal y las instancias siguientes.</div>
     <p style="color:var(--mut);font-size:13px;margin-bottom:18px">Hacé una captura de pantalla para conservar el comprobante.</p>
     <button class="btn ghost" onclick="location.reload()">Volver al inicio</button>
   </section>
@@ -582,11 +651,12 @@ footer{text-align:center;color:var(--mut);font-size:12px;margin-top:40px}
     <div class="tools">
       <input class="q" id="fQ" placeholder="Buscar por nombre, LP, DNI, materia, curso, unidad…">
       <select id="fSit"><option value="">Toda situación</option><option value="actividad">En actividad</option><option value="retirado">Retirado/a</option><option value="civil">Civil</option></select>
-      <select id="fCond"><option value="">Continúa / nuevo</option><option value="continua">Continúa</option><option value="nuevo">Nuevo</option></select>
+      <select id="fMat"><option value="">Todas las materias</option></select>
       <select id="fEst"><option value="">Todo estado</option></select>
       <select id="fCiu"><option value="">Toda ciudad</option></select>
       <select id="fDoc"><option value="">Documentación</option><option value="completa">Completa</option><option value="incompleta">Incompleta</option></select>
     </div>
+    <div class="cfil" id="cFil"></div>
     <div style="font-size:13px;color:var(--mut);margin-bottom:10px" id="cnt"></div>
     <div class="list" id="list"></div>
   </div>
@@ -619,7 +689,12 @@ const sb = CONFIGURADO ? supabase.createClient(SUPABASE_URL, SUPABASE_ANON_KEY, 
 
 const ESTADOS = ['pendiente','preseleccionado','entrevistado','designado','descartado'];
 const SIT_TXT = {actividad:'En actividad', retirado:'Retirado/a', civil:'Civil'};
-const COND_TXT = {continua:'Continúa', nuevo:'Nuevo'};
+const COND_TXT = {actual:'Dicta actualmente', anterior:'Dictó en años anteriores', primera:'Primera vez', continua:'Dicta actualmente', nuevo:'Primera vez'};
+const condK = c => ({continua:'actual', nuevo:'primera'})[c] || c || '';
+const MATERIAS = ['Educación Física Policial','Defensa Policial','Doctrina e Identidad Profesional','Manejo de Armas de Fuego, Tiro y Equipamiento','Alfabetización Académica y Estrategias Comunicacionales','Tránsito y Conducción Vehicular Policial','Marco Legal de Actuación Policial','Seguridad Pública y Estrategias de Intervención Preventiva','Abordaje y Resolución Alternativa de Conflictos','Prevención Integral del Delito','Problemática Delictual','Técnicas de Investigación Criminal','Actuación Policial Frente a Emergencias y Siniestros','Derechos Humanos','Legislación Policial','Procedimientos Policiales','Perspectivas de Género y Diversidad'];
+const norm = s => (s||'').toLowerCase().normalize('NFD').replace(/[\u0300-\u036f]/g,'');
+const fDia = s => s ? String(s).slice(0,10).split('-').reverse().join('/') : '';
+const edad = s => { if(!s) return ''; const n = new Date(s+'T12:00:00'), h = new Date(); let e = h.getFullYear()-n.getFullYear(); if(h < new Date(h.getFullYear(), n.getMonth(), n.getDate())) e--; return e; };
 const EST_TXT = {pendiente:'Registrado', preseleccionado:'Preseleccionado', entrevistado:'Entrevistado', designado:'Convocado', descartado:'No convocado'};
 const CATS = [
   {id:'dni',      g:'ya',   ico:'🪪', t:'DNI – anverso y reverso', d:'Fotocopia o foto de ambos lados', req:true},
@@ -668,7 +743,7 @@ async function leerConfig(){
 
 /* ===================== FORMULARIO ===================== */
 const frm = $('#frm');
-const PASOS = ['Datos personales','Situación actual','Formación y propuesta','Documentación','Confirmación'];
+const PASOS = ['Datos personales','Situación y datos laborales','Experiencia y materias','Documentación','Confirmación'];
 let paso = 0;
 
 function empezar(){
@@ -709,19 +784,26 @@ function validarPaso(n){
   const req = names => names.forEach(k => { if(!frm[k].value.trim()) marcar(frm[k]); });
   document.querySelectorAll(`[data-step="${n}"] .bad`).forEach(e=>e.classList.remove('bad'));
   if(n===0){
-    req(['apellido','nombre','dni','telefono','ciudad']);
+    req(['apellido','nombre','dni','fecha_nac','domicilio','ciudad','telefono']);
     const d = frm.dni.value.replace(/\D/g,'');
     if(frm.dni.value.trim() && (d.length<7||d.length>9)) marcar(frm.dni);
+    const e = edad(frm.fecha_nac.value);
+    if(frm.fecha_nac.value && (e<18 || e>90)) marcar(frm.fecha_nac);
     if(frm.telefono.value.trim() && frm.telefono.value.replace(/\D/g,'').length<8) marcar(frm.telefono);
     if(frm.email.value.trim() && !/^\S+@\S+\.\S+$/.test(frm.email.value.trim())) marcar(frm.email);
   }
   if(n===1){
     const s = frm.situacion.value;
     if(!s) marcar($('#sitChips'));
-    if(!frm.condicion_docente.value) marcar($('#condChips'));
-    if(s==='actividad' && !frm.unidad.value.trim()) marcar(frm.unidad);
+    if(s==='actividad') req(['jerarquia','unidad','unidad_domicilio','fecha_ingreso','cargo','horario']);
+    if(frm.fecha_ingreso.value && new Date(frm.fecha_ingreso.value) > new Date()) marcar(frm.fecha_ingreso);
   }
-  if(n===2) req(['materias']);
+  if(n===2){
+    const c = frm.condicion_docente.value;
+    if(!c) marcar($('#condChips'));
+    if(c==='actual') req(['materia_actual']);
+    if(!MATSEL.size && !frm.materia_otra.value.trim()) marcar($('#msMat'));
+  }
   if(n===3) CATS.filter(c=>c.req).forEach(c => { if(!BOX.r[c.id].length) marcar(document.getElementById('up-r-'+c.id)); });
   if(n===4){ ['1','2'].forEach(i => { if(!$('#acepto'+i).checked) marcar($('#chk'+i)); }); }
   return ok;
@@ -729,13 +811,45 @@ function validarPaso(n){
 frm.addEventListener('input', e => { e.target.classList.remove('bad'); e.target.closest('.bad')?.classList.remove('bad'); });
 
 function actualizarSituacion(){
-  const s = frm.situacion.value;
-  const pol = s==='actividad'||s==='retirado';
+  const s = frm.situacion.value, A = s==='actividad', R = s==='retirado';
+  const pol = A || R, ast = A ? ' <b>*</b>' : '', opc = (A ? '' : ' <small style="font-weight:500;color:var(--mut)">(si corresponde)</small>');
   $('#sitCampos').classList.toggle('hidden', !s);
   document.querySelectorAll('.pol').forEach(e=>e.classList.toggle('hidden', !pol));
-  $('#lblUnidad').innerHTML = s==='actividad' ? 'Unidad o lugar donde presta servicio <b>*</b>' : s==='retirado' ? 'Último destino / ocupación actual' : 'Lugar de trabajo o institución';
+  $('#lblJer').innerHTML = 'Jerarquía' + ast;
+  $('#lblUnidad').innerHTML = (A ? 'Unidad donde presta servicio' : R ? 'Lugar donde trabaja actualmente' : 'Lugar laboral') + ast + opc;
+  $('#lblUDom').innerHTML = (A ? 'Domicilio de la unidad' : 'Domicilio del lugar laboral') + ast + opc;
+  $('#lblFIng').innerHTML = (pol ? 'Fecha de ingreso a la institución policial' : 'Fecha de ingreso al lugar en el que trabaja') + ast;
+  $('#lblCargo').innerHTML = (A ? 'Cargo o función que ocupa en la unidad' : 'Cargo o función que ocupa') + ast + opc;
+  $('#lblHor').innerHTML = (A ? 'Horario que cumple en la unidad' : 'Horario que cumple') + ast + opc;
+}
+frm.querySelectorAll('[name=condicion_docente]').forEach(r=>r.addEventListener('change', () => {
+  $('#condChips').classList.remove('bad');
+  $('#matActWrap').classList.toggle('hidden', frm.condicion_docente.value!=='actual');
+}));
+frm.querySelectorAll('[name=situacion]').forEach(r=>r.addEventListener('change', () => $('#sitChips').classList.remove('bad')));
+
+/* ---------- selector de materias ---------- */
+const MATSEL = new Set();
+$('#msList').innerHTML = MATERIAS.map((m,i)=>`<label><input type="checkbox" value="${i}" onchange="selMat(${i},this.checked)">${m}</label>`).join('');
+function toggleMs(abrirlo){
+  const ab = abrirlo ?? $('#msPop').classList.contains('hidden');
+  $('#msPop').classList.toggle('hidden', !ab); $('#msBtn').classList.toggle('open', ab);
+}
+function selMat(i, on){
+  on ? MATSEL.add(MATERIAS[i]) : MATSEL.delete(MATERIAS[i]);
+  $('#msList').querySelectorAll('input')[i].checked = on;
+  $('#msMat').classList.remove('bad');
+  const n = MATSEL.size;
+  $('#msTxt').textContent = n ? `${n} materia${n===1?'':'s'} seleccionada${n===1?'':'s'}` : 'Seleccioná una o más materias';
+  $('#msCnt').textContent = n ? `${n} seleccionada${n===1?'':'s'}` : 'Ninguna seleccionada';
+  $('#msChips').innerHTML = MATERIAS.map((m,j)=>MATSEL.has(m)?`<span>${m}<button type="button" title="Quitar" onclick="selMat(${j},false)">×</button></span>`:'').join('');
+}
+function materiasTxt(){
+  const o = frm.materia_otra.value.trim();
+  return [...MATERIAS.filter(m=>MATSEL.has(m)), ...(o ? ['Otra: '+o] : [])].join('; ');
 }
 frm.querySelectorAll('[name=situacion]').forEach(r=>r.addEventListener('change', actualizarSituacion));
+actualizarSituacion();
 
 /* ---------- subida de documentación ---------- */
 const BOX = {r:Object.fromEntries(CATS.map(c=>[c.id,[]])), c:Object.fromEntries(CATS.map(c=>[c.id,[]]))};
@@ -812,16 +926,19 @@ function comprimir(file){
 }
 
 function armarResumen(){
-  const s = frm.situacion.value, v = k => frm[k].value.trim();
+  const s = frm.situacion.value, v = k => frm[k].value.trim(), c = frm.condicion_docente.value;
   const n = cantArch('r');
   const pend = CHECK.filter(c=>!BOX.r[c.id].length).map(c=>CAT_CORTO[c.id]);
   const fila = (t,x) => x ? `<dt>${t}</dt><dd>${esc(x)}</dd>` : '';
   $('#resumen').innerHTML =
-    fila('Postulante', `${v('apellido').toUpperCase()}, ${v('nombre')}`) + fila('DNI', v('dni')) +
-    fila('Situación', SIT_TXT[s] + (v('lp') ? ' · LP '+v('lp') : '')) +
-    fila('Condición', frm.condicion_docente.value==='continua' ? 'Docente que continúa' : 'Nuevo postulante') +
-    fila('Contacto', v('telefono') + (v('email') ? ' · '+v('email') : '')) + fila('Ciudad', v('ciudad')) +
-    fila('Materias', v('materias')) + fila('Documentación', `${n} archivo${n===1?'':'s'}`) +
+    fila('Postulante', `${v('apellido').toUpperCase()}, ${v('nombre')}`) + fila('D.N.I.', v('dni')) +
+    fila('Nacimiento', `${fDia(v('fecha_nac'))} (${edad(v('fecha_nac'))} años)`) +
+    fila('Domicilio', `${v('domicilio')} · ${v('ciudad')}`) +
+    fila('Situación', [SIT_TXT[s], s!=='civil'?v('jerarquia'):'', v('lp')?'L.P. '+v('lp'):''].filter(Boolean).join(' · ')) +
+    fila('Lugar laboral', [v('unidad'), v('cargo')].filter(Boolean).join(' · ')) +
+    fila('Contacto', v('telefono') + (v('email') ? ' · '+v('email') : '')) +
+    fila('Experiencia', COND_TXT[c] + (c==='actual' && v('materia_actual') ? ' — '+v('materia_actual') : '')) +
+    fila('Materias', materiasTxt()) + fila('Documentación', `${n} archivo${n===1?'':'s'}`) +
     (pend.length ? fila('Para después', pend.join(', ')) : '');
 }
 
@@ -839,8 +956,11 @@ async function enviar(){
     ov.set('Guardando tus datos…');
     const p = {
       apellido:v('apellido'), nombre:v('nombre'), dni:v('dni'), telefono:v('telefono'), email:v('email'), ciudad:v('ciudad'),
+      fecha_nac:v('fecha_nac'), domicilio:v('domicilio'),
       situacion:s, lp: v('lp'), jerarquia: s==='civil'?'':v('jerarquia'), unidad:v('unidad'),
-      condicion_docente:frm.condicion_docente.value, titulo:v('titulo'), cursos:v('cursos'), materias:v('materias'),
+      unidad_domicilio:v('unidad_domicilio'), fecha_ingreso:v('fecha_ingreso'), cargo:v('cargo'), horario:v('horario'),
+      condicion_docente:frm.condicion_docente.value, materia_actual: frm.condicion_docente.value==='actual' ? v('materia_actual') : '',
+      titulo:v('titulo'), cursos:v('cursos'), materias:materiasTxt(),
       experiencia:v('experiencia'), docs, carpeta, acepta:true
     };
     const {data, error} = await sb.rpc('registrar_postulante', {p});
@@ -954,6 +1074,7 @@ $('#lgPass').addEventListener('keydown', e => { if(e.key==='Enter') $('#btnLogin
 async function entrar(){
   $('#login').classList.add('hidden'); $('#panel').classList.remove('hidden');
   $('#fEst').innerHTML = '<option value="">Todo estado</option>' + ESTADOS.map(e=>`<option value="${e}">${EST_TXT[e]}</option>`).join('');
+  $('#fMat').innerHTML = '<option value="">Todas las materias</option>' + MATERIAS.map(m=>`<option>${m}</option>`).join('');
   await cargar();
   clearInterval(timer); timer = setInterval(cargar, 60000);
 }
@@ -973,16 +1094,18 @@ async function cargar(){
   render();
 }
 
+let FCOND = '';
+function setCond(k){ FCOND = FCOND===k ? '' : k; render(); }
 function filtrados(){
-  const norm = s => (s||'').toLowerCase().normalize('NFD').replace(/[̀-ͯ]/g,'');
   const q = norm($('#fQ').value.trim());
   return DATA.filter(d =>
     (!$('#fSit').value || d.situacion===$('#fSit').value) &&
-    (!$('#fCond').value || d.condicion_docente===$('#fCond').value) &&
+    (!FCOND || condK(d.condicion_docente)===FCOND) &&
+    (!$('#fMat').value || norm(d.materias).includes(norm($('#fMat').value))) &&
     (!$('#fEst').value || d.estado===$('#fEst').value) &&
     (!$('#fCiu').value || d.ciudad.trim()===$('#fCiu').value) &&
     (!$('#fDoc').value || (docEstado(d).falta.length===0) === ($('#fDoc').value==='completa')) &&
-    (!q || norm([d.apellido,d.nombre,d.dni,d.lp,d.unidad,d.materias,d.cursos,d.titulo,d.jerarquia,d.ciudad].join(' ')).includes(q)));
+    (!q || norm([d.apellido,d.nombre,d.dni,d.lp,d.unidad,d.materias,d.materia_actual,d.cursos,d.titulo,d.jerarquia,d.ciudad,d.cargo,d.domicilio].join(' ')).includes(q)));
 }
 
 function render(){
@@ -991,19 +1114,22 @@ function render(){
     ['Registrados',DATA.length],['En actividad',c('situacion','actividad')],['Retirados',c('situacion','retirado')],
     ['Civiles',c('situacion','civil')],['Doc. completa',DATA.filter(d=>!docEstado(d).falta.length).length],['Convocados',c('estado','designado')]
   ].map(([t,n])=>`<div class="stat"><b>${n}</b><span>${t}</span></div>`).join('');
+  const cc = k => DATA.filter(d=>condK(d.condicion_docente)===k).length;
+  $('#cFil').innerHTML = `<button class="${FCOND?'':'on'}" onclick="setCond('')"><i></i>Todos <b>${DATA.length}</b></button>` +
+    ['actual','anterior','primera'].map(k=>`<button class="k-${k} ${FCOND===k?'on':''}" onclick="setCond('${k}')"><i></i>${COND_TXT[k]} <b>${cc(k)}</b></button>`).join('');
   const L = filtrados();
   $('#cnt').textContent = L.length===DATA.length ? `${L.length} docentes registrados` : `${L.length} de ${DATA.length} docentes`;
   $('#list').innerHTML = L.length ? L.map(d => `
-    <div class="pc" onclick="ver('${d.id}')">
+    <div class="pc k-${condK(d.condicion_docente)}" onclick="ver('${d.id}')">
       <div class="h"><div><div class="nm">${esc(d.apellido.toUpperCase())}, ${esc(d.nombre)}</div>
         <div class="meta">${d.lp?'LP '+esc(d.lp)+' · ':''}${d.jerarquia?esc(d.jerarquia)+' · ':''}${esc(d.ciudad)}</div></div>
-        <div class="pills"><span class="pill p-${d.situacion}">${SIT_TXT[d.situacion]}</span>${d.condicion_docente?`<span class="pill p-${d.condicion_docente}">${COND_TXT[d.condicion_docente]}</span>`:''}</div></div>
+        <div class="pills"><span class="pill p-${d.situacion}">${SIT_TXT[d.situacion]}</span>${d.condicion_docente?`<span class="pill p-${condK(d.condicion_docente)}">${COND_TXT[d.condicion_docente]}</span>`:''}</div></div>
       ${d.unidad?`<div class="meta">📍 ${esc(d.unidad)}</div>`:''}
       <div class="mat">📚 ${esc(d.materias)}</div>
       <div class="ft"><span>#${pad(d.nro)} · ${fmtFecha(d.creado)} · <span class="${docEstado(d).falta.length?'':'dok'}">📎 ${docEstado(d).ok}/${docEstado(d).tot}</span></span><b class="e-${d.estado}">● ${EST_TXT[d.estado]||d.estado}</b></div>
     </div>`).join('') : '<div class="empty">No hay docentes que coincidan.</div>';
 }
-['fQ','fSit','fCond','fEst','fCiu','fDoc'].forEach(id => $('#'+id).addEventListener('input', render));
+['fQ','fSit','fMat','fEst','fCiu','fDoc'].forEach(id => $('#'+id).addEventListener('input', render));
 
 function abrir(html){ $('#md').innerHTML = html; $('#ov').classList.remove('hidden'); document.body.style.overflow='hidden'; }
 function cerrar(){ $('#ov').classList.add('hidden'); document.body.style.overflow=''; }
@@ -1016,16 +1142,19 @@ async function ver(id){
   const grupos = CATS.map(c => ({c, it: docs.filter(x=>x.cat===c.id)})).filter(g=>g.it.length);
   const de = docEstado(d);
   abrir(`
-    <div class="row" style="justify-content:space-between"><div class="pills" style="justify-content:flex-start"><span class="pill p-${d.situacion}">${SIT_TXT[d.situacion]}</span>${d.condicion_docente?`<span class="pill p-${d.condicion_docente}">${COND_TXT[d.condicion_docente]}</span>`:''}</div>
+    <div class="row" style="justify-content:space-between"><div class="pills" style="justify-content:flex-start"><span class="pill p-${d.situacion}">${SIT_TXT[d.situacion]}</span>${d.condicion_docente?`<span class="pill p-${condK(d.condicion_docente)}">${COND_TXT[d.condicion_docente]}</span>`:''}</div>
       <span style="color:var(--mut);font-size:13px">#${pad(d.nro)} · ${fmtFecha(d.creado)}</span></div>
     <h3 style="margin-top:12px">${esc(d.apellido.toUpperCase())}, ${esc(d.nombre)}</h3>
     <dl class="dl">
-      ${row('DNI',d.dni)}${row('LP',d.lp)}${row('Jerarquía',d.jerarquia)}
-      ${row(d.situacion==='actividad'?'Unidad':d.situacion==='retirado'?'Último destino':'Lugar de trabajo',d.unidad)}
-      ${row('Ciudad',d.ciudad)}
+      ${row('D.N.I.',d.dni)}${row('Nacimiento',d.fecha_nac?`${fDia(d.fecha_nac)} (${edad(d.fecha_nac)} años)`:'')}
+      ${row('Domicilio',[d.domicilio,d.ciudad].filter(Boolean).join(' · '))}
+      ${row('Jerarquía',d.jerarquia)}${row('L.P. N°',d.lp)}
+      ${row(d.situacion==='actividad'?'Unidad':'Lugar laboral',d.unidad)}${row('Domicilio laboral',d.unidad_domicilio)}
+      ${row('Fecha de ingreso',fDia(d.fecha_ingreso))}${row('Cargo o función',d.cargo)}${row('Horario',d.horario)}
       <dt>Teléfono</dt><dd><a href="https://wa.me/${waNum(d.telefono)}" target="_blank">${esc(d.telefono)}</a></dd>
       ${d.email?`<dt>Correo</dt><dd><a href="mailto:${esc(d.email)}">${esc(d.email)}</a></dd>`:''}
-      ${row('Título',d.titulo)}${row('Cursos',d.cursos)}${row('Materias',d.materias)}${row('Experiencia',d.experiencia)}
+      ${row('Experiencia en la Escuela',COND_TXT[d.condicion_docente])}${row('Materia/s que dicta',d.materia_actual)}
+      ${row('Materias de interés',d.materias)}${row('Título',d.titulo)}${row('Cursos',d.cursos)}${row('Otra experiencia',d.experiencia)}
     </dl>
     <div class="dg"><h4><span>📎 Documentación · ${de.ok} de ${de.tot}</span>${docs.length?`<button class="btn sm ghost" id="bZip" onclick="bajarZip('${d.id}')">⬇ Descargar todo</button>`:''}</h4>
       <div class="chkl">${CHECK.map(c=>`<div class="${de.tiene.has(c.id)?'si':'no'}"><i>${de.tiene.has(c.id)?'✓':'·'}</i>${c.t}${de.tiene.has(c.id)?'':' — pendiente'}</div>`).join('')}</div>
@@ -1146,15 +1275,19 @@ async function guardarConfig(){
 
 function libroExcel(L){
   const filas = L.slice().sort((a,b)=>a.nro-b.nro).map(d => ({
-    'N.º':d.nro, 'Fecha':fmtFecha(d.creado), 'Apellido':d.apellido, 'Nombre':d.nombre, 'DNI':d.dni, 'LP':d.lp||'',
-    'Situación':SIT_TXT[d.situacion], 'Condición':COND_TXT[d.condicion_docente]||'', 'Jerarquía':d.jerarquia||'',
-    'Unidad / lugar':d.unidad||'', 'Ciudad':d.ciudad, 'Teléfono':d.telefono, 'Correo':d.email||'', 'Título':d.titulo||'',
-    'Cursos realizados':d.cursos||'', 'Materias de interés':d.materias, 'Experiencia docente':d.experiencia||'',
+    'N.º':d.nro, 'Fecha de registro':fmtFecha(d.creado), 'Apellido':d.apellido, 'Nombre':d.nombre, 'D.N.I.':d.dni,
+    'Fecha de nacimiento':fDia(d.fecha_nac), 'Edad':edad(d.fecha_nac), 'Domicilio':d.domicilio||'', 'Localidad':d.ciudad,
+    'Teléfono':d.telefono, 'Correo':d.email||'',
+    'Situación':SIT_TXT[d.situacion], 'Jerarquía':d.jerarquia||'', 'L.P. N°':d.lp||'',
+    'Unidad / lugar laboral':d.unidad||'', 'Domicilio laboral':d.unidad_domicilio||'', 'Fecha de ingreso':fDia(d.fecha_ingreso),
+    'Cargo o función':d.cargo||'', 'Horario':d.horario||'',
+    'Experiencia en la Escuela':COND_TXT[d.condicion_docente]||'', 'Materia/s que dicta':d.materia_actual||'',
+    'Materias de interés':d.materias, 'Título':d.titulo||'', 'Cursos realizados':d.cursos||'', 'Otra experiencia docente':d.experiencia||'',
     ...Object.fromEntries(CHECK.map(c=>[CAT_CORTO[c.id], docEstado(d).tiene.has(c.id)?'Sí':'Pendiente'])),
     'Doc. completa':docEstado(d).falta.length?'No':'Sí', 'Archivos':(d.docs||[]).length, 'Estado':EST_TXT[d.estado]||d.estado, 'Notas':d.notas||''
   }));
   const ws = XLSX.utils.json_to_sheet(filas);
-  ws['!cols'] = [6,16,16,16,11,10,13,11,14,28,14,15,24,28,40,40,40,9,9,9,15,15,12,9,10,11,9,14,30].map(w=>({wch:w}));
+  ws['!cols'] = Object.keys(filas[0]).map(k => ({wch: Math.min(45, Math.max(9, k.length+2, ...filas.map(f => String(f[k]??'').length*0.8)))}));
   ws['!autofilter'] = {ref: ws['!ref']};
   const wb = XLSX.utils.book_new(); XLSX.utils.book_append_sheet(wb, ws, 'Docentes');
   return wb;
