@@ -1,10 +1,10 @@
 <!DOCTYPE html>
-<html lang="es" data-mode="dark" data-color="grafito" data-app="panel">
+<html lang="es" data-mode="dark" data-color="turquesa" data-app="panel">
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
-<meta name="version" content="1.8.1">
-<meta name="theme-color" content="#07070D">
+<meta name="version" content="1.9.1">
+<meta name="theme-color" content="#061A20">
 <meta name="description" content="Registro Docente 2027 · Escuela de Agentes de Seguridad · DCFyCCCO">
 <title>Base Docente · DCFyCCCO</title>
 <link rel="icon" type="image/png" href="icon-192.png">
@@ -14,7 +14,7 @@
 <meta name="apple-mobile-web-app-capable" content="yes">
 <meta name="apple-mobile-web-app-title" content="Base Docente">
 <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
-<script>try{const t=JSON.parse(localStorage.getItem('reg-doc-tema')||'{}');if(t.mode)document.documentElement.dataset.mode=t.mode;if(t.color)document.documentElement.dataset.color=t.color;}catch(e){}</script>
+<script>try{const t=JSON.parse(localStorage.getItem('reg-doc-tema-v19')||'{}');if(t.mode)document.documentElement.dataset.mode=t.mode;if(t.color)document.documentElement.dataset.color=t.color;}catch(e){}</script>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
 <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2.45.4/dist/umd/supabase.min.js"></script>
@@ -40,6 +40,11 @@
   color-scheme:light;
 }
 /* COLOR */
+[data-color=turquesa]{--c1:#0F8F8A;--c2:#22C9C3;--c3:#5EE0D9}
+[data-mode=dark][data-color=turquesa]{--bg:#061A20;--bg2:#0B2A33;--card:rgba(14,69,82,.38);--cardb:rgba(94,224,217,.16);--field:rgba(14,69,82,.32);
+  --tx:#E3F4F3;--mut:#8DB5B6;--line:rgba(94,224,217,.14);--line2:rgba(94,224,217,.28);--dot:rgba(94,224,217,.07);
+  --herobase:linear-gradient(165deg,#0E3A45 0%,#0A2A33 55%,#071F26 100%)}
+[data-mode=light][data-color=turquesa]{--bg:#EEF7F7;--field:#F4FAFA;--herobase:linear-gradient(165deg,#0E3A45,#071F26)}
 [data-color=violeta]{--c1:#6D5BFF;--c2:#A855F7;--c3:#F0509B}
 [data-color=azul]{--c1:#1D4ED8;--c2:#3B82F6;--c3:#38BDF8}
 [data-color=esmeralda]{--c1:#047857;--c2:#10B981;--c3:#A3E635}
@@ -67,7 +72,7 @@
 .seg{display:grid;grid-template-columns:1fr 1fr;background:var(--field);border:1px solid var(--line);border-radius:14px;padding:4px;margin-bottom:16px}
 .seg button{border:0;background:none;color:var(--tx);font:600 13px "Plus Jakarta Sans",sans-serif;padding:9px;border-radius:10px;cursor:pointer}
 .seg button.on{background:var(--grad);color:#fff}
-.dots{display:grid;grid-template-columns:repeat(6,1fr);gap:8px}
+.dots{display:grid;grid-template-columns:repeat(7,1fr);gap:8px}
 .dots button{background:linear-gradient(135deg,var(--c1),var(--c2),var(--c3));aspect-ratio:1;border-radius:50%;border:2px solid transparent;cursor:pointer;outline:2px solid transparent;outline-offset:2px}
 .dots button.on{outline-color:var(--ink)}
 .dots small{display:block;margin-top:10px;font-size:12px;color:var(--mut);grid-column:1/-1}
@@ -331,6 +336,16 @@ footer{text-align:center;color:var(--mut);font-size:12px;margin-top:40px}
 .cfil button.on{border-color:var(--kc,var(--ink));background:color-mix(in srgb,var(--kc,var(--c2)) 16%,transparent)}
 .sub{grid-column:1/-1;font-weight:800;font-size:13px;letter-spacing:.06em;text-transform:uppercase;color:var(--mut);margin:10px 0 -2px}
 
+.lema{display:flex;align-items:stretch;gap:14px;margin-top:22px;font-weight:800;font-size:clamp(17px,3.6vw,21px);letter-spacing:-.01em;color:#fff;line-height:1.3}
+.lema i{flex:none;width:5px;align-self:stretch;min-height:28px;border-radius:5px;background:var(--c2)}
+.lema span{color:var(--c3)}
+.lema2{margin:0 auto 22px;max-width:460px;font-weight:800;font-size:17px;color:var(--ink)}
+.lema2 span{color:var(--c2)}
+.exento{display:flex;gap:14px;align-items:flex-start;padding:18px;border-radius:20px;background:var(--accs);border:1px solid var(--accline);font-size:15px;line-height:1.5;margin-bottom:14px}
+.exento i{font-style:normal;font-size:24px;flex:none}
+.exento b{color:var(--ink)}
+.opc{font-weight:500;color:var(--mut);font-size:12px}
+
 /* ===== PANEL ===== */
 .top{display:flex;align-items:center;justify-content:space-between;gap:12px;flex-wrap:wrap;margin:6px 0 18px}
 .top h1{font-size:32px;line-height:1.05}
@@ -411,12 +426,12 @@ footer{text-align:center;color:var(--mut);font-size:12px;margin-top:40px}
       <div><div class="badge" id="badge"><i></i> Registro abierto</div></div>
       <h1>Registro<br>Docente <span class="hlt">2027</span></h1>
       <p class="lead">La Secretaría Académica del DCFyCCCO convoca al personal policial en actividad, al personal en situación de retiro y a profesionales civiles a integrar el Registro Docente de la Escuela de Agentes de Seguridad para el ciclo lectivo 2027. Completá tus datos, tus antecedentes y tu documentación para participar de la conformación del cuerpo docente.</p>
+      <div class="lema"><i></i><p>Detrás de cada Agente de Seguridad, <span>hay un docente que lo formó.</span></p></div>
       <div id="cfgMsg" style="margin-top:18px"></div>
       <div class="cta" id="cta1">
         <button class="btn lg" onclick="empezar()">Completar mi registro <span class="ar">→</span></button>
         <small>Tiempo estimado: 10 minutos</small>
       </div>
-      <div style="margin-top:14px;color:var(--herom)">¿Ya te registraste? <button class="linkc" onclick="abrirCompletar()">Completar documentación</button></div>
     </header>
 
     <div class="sec-t"><div class="k">Destinatarios</div><h2>Personal policial y profesionales civiles</h2></div>
@@ -449,13 +464,12 @@ footer{text-align:center;color:var(--mut);font-size:12px;margin-top:40px}
     </div>
     <div class="nota">La Secretaría Académica analizará cada registro y se comunicará con cada docente para coordinar las instancias siguientes.</div>
 
-    <div class="sec-t"><div class="k">Documentación</div><h2>Qué vas a necesitar</h2><p>PDF o foto sacada con el celular · máximo 10 MB por archivo.</p></div>
+    <div class="sec-t"><div class="k">Documentación</div><h2>Qué vas a necesitar</h2><p>Para <b>personal policial retirado</b> y <b>profesionales civiles</b>. El personal policial en actividad no presenta documentación. PDF o foto · máximo 10 MB por archivo.</p></div>
     <div id="docInfo"></div>
 
     <div class="endcta" id="cta2">
       <div><h3>Formá parte del cuerpo docente 2027</h3><p>Completá el registro con tus datos y tu documentación.</p></div>
-      <div style="display:flex;flex-direction:column;align-items:flex-start;gap:10px"><button class="btn dark lg" onclick="empezar()">Completar mi registro <span class="ar">→</span></button>
-      <button class="linkc" style="color:#fff" onclick="abrirCompletar()">¿Ya te registraste? Completar documentación</button></div>
+      <div style="display:flex;flex-direction:column;align-items:flex-start;gap:10px"><button class="btn dark lg" onclick="empezar()">Completar mi registro <span class="ar">→</span></button></div>
     </div>
   </section>
 
@@ -468,15 +482,15 @@ footer{text-align:center;color:var(--mut);font-size:12px;margin-top:40px}
     <form id="frm" novalidate onsubmit="return false">
 
       <div class="card st" data-step="0">
-        <div class="st-h"><span class="k">1</span><div><h2>Datos personales</h2><p>Completá tus datos tal como figuran en tu documento.</p></div></div>
+        <div class="st-h"><span class="k">1</span><div><h2>Datos personales</h2><p>Completá tus datos tal como figuran en tu documento. Solo son obligatorios los marcados con <b style="color:var(--err)">*</b>.</p></div></div>
         <div class="grid">
           <label class="f"><span>Apellido/s completo/s <b>*</b></span><input name="apellido" autocomplete="family-name"></label>
           <label class="f"><span>Nombre/s completo/s <b>*</b></span><input name="nombre" autocomplete="given-name"></label>
           <label class="f"><span>D.N.I. <b>*</b></span><input name="dni" inputmode="numeric" placeholder="Sin puntos"></label>
-          <label class="f"><span>Fecha de nacimiento <b>*</b></span><input name="fecha_nac" type="date" max="2010-12-31"></label>
-          <label class="f full"><span>Domicilio actual <b>*</b></span><input name="domicilio" autocomplete="street-address" placeholder="Calle, número, barrio"></label>
-          <label class="f"><span>Localidad <b>*</b></span><input name="ciudad" list="ciudades" placeholder="Ej.: Cutral-Có"></label>
-          <label class="f"><span>Teléfono / WhatsApp <b>*</b></span><input name="telefono" inputmode="tel" placeholder="299 4 123456"></label>
+          <label class="f"><span>Fecha de nacimiento</span><input name="fecha_nac" type="date" max="2010-12-31"></label>
+          <label class="f full"><span>Domicilio actual</span><input name="domicilio" autocomplete="street-address" placeholder="Calle, número, barrio"></label>
+          <label class="f"><span>Localidad</span><input name="ciudad" list="ciudades" placeholder="Ej.: Cutral-Có"></label>
+          <label class="f"><span>Teléfono / WhatsApp</span><input name="telefono" inputmode="tel" placeholder="299 4 123456"></label>
           <label class="f full"><span>Correo electrónico</span><input name="email" type="email" autocomplete="email"></label>
         </div>
         <datalist id="ciudades"><option>Cutral-Có</option><option>Plaza Huincul</option><option>Neuquén</option><option>Zapala</option><option>Plottier</option><option>Senillosa</option><option>Centenario</option><option>Picún Leufú</option><option>Challacó</option><option>Las Lajas</option><option>Piedra del Águila</option></datalist>
@@ -504,16 +518,16 @@ footer{text-align:center;color:var(--mut);font-size:12px;margin-top:40px}
 
       <div class="card st hidden" data-step="2">
         <div class="st-h"><span class="k">3</span><div><h2>Experiencia y materias</h2><p>Tu experiencia en la Escuela y las materias que te interesa dictar.</p></div></div>
-        <div class="lbl">Experiencia docente en la Escuela <b>*</b></div>
+        <div class="lbl">Experiencia docente en la Escuela</div>
         <div class="chips" id="condChips">
           <label class="chip k-actual"><input type="radio" name="condicion_docente" value="actual"><strong><span class="dot"></span>Actualmente dicto clases</strong><em>Ciclo lectivo en curso</em></label>
           <label class="chip k-anterior"><input type="radio" name="condicion_docente" value="anterior"><strong><span class="dot"></span>Dicté clases en años anteriores</strong><em>No en el ciclo actual</em></label>
           <label class="chip k-primera"><input type="radio" name="condicion_docente" value="primera"><strong><span class="dot"></span>Es mi primera vez</strong><em>Nunca dicté clases en la Escuela</em></label>
         </div>
         <div class="grid" style="margin-top:16px">
-          <label class="f full hidden" id="matActWrap"><span>Materia/s que dicta actualmente <b>*</b></span><input name="materia_actual" placeholder="Ej.: Defensa Policial"></label>
+          <label class="f full hidden" id="matActWrap"><span>Materia/s que dicta actualmente</span><input name="materia_actual" placeholder="Ej.: Defensa Policial"></label>
           <div class="full">
-            <label class="f" style="margin-bottom:0"><span>Materia/s que le interesa dictar en 2027 <b>*</b></span></label>
+            <label class="f" style="margin-bottom:0"><span>Materia/s que le interesa dictar en 2027</span></label>
             <div class="ms" id="msMat">
               <button type="button" class="ms-btn" id="msBtn" onclick="toggleMs()"><span id="msTxt">Seleccioná una o más materias</span><i>▾</i></button>
               <div class="ms-pop hidden" id="msPop">
@@ -523,7 +537,7 @@ footer{text-align:center;color:var(--mut);font-size:12px;margin-top:40px}
               <div class="ms-chips" id="msChips"></div>
             </div>
           </div>
-          <label class="f full"><span>Otra propuesta <small style="font-weight:500;color:var(--mut)">(opcional)</small></span><input name="materia_otra" placeholder="Si te interesa otra materia o taller, indicalo acá"></label>
+          <label class="f full hidden" id="otraWrap"><span>Nombre de la otra materia</span><input name="materia_otra" placeholder="Escribí el nombre de la materia"></label>
           <div class="sub">Formación</div>
           <label class="f full"><span>Último título obtenido</span><input name="titulo" placeholder="Ej.: Profesor/a en Educación Física · Abogado/a · Téc. Sup. en Seguridad"></label>
           <label class="f full"><span>Cursos realizados</span><textarea name="cursos" placeholder="Cursos, capacitaciones o especializaciones"></textarea></label>
@@ -533,6 +547,7 @@ footer{text-align:center;color:var(--mut);font-size:12px;margin-top:40px}
 
       <div class="card st hidden" data-step="3">
         <div class="st-h"><span class="k">4</span><div><h2>Documentación</h2><p>PDF o foto · máx. 10 MB por archivo. Podés agregar varios archivos en cada ítem.</p></div></div>
+        <div class="exento hidden" id="exento"><i>✓</i><div><b>El personal policial en actividad no presenta documentación.</b><br>Podés continuar al paso siguiente.</div></div>
         <div id="ups"></div>
       </div>
 
@@ -546,6 +561,7 @@ footer{text-align:center;color:var(--mut);font-size:12px;margin-top:40px}
           <div><i>3</i><span>Remitiré <b>semanalmente la planificación</b> de mis clases a la Secretaría Académica.</span></div>
           <div><i>4</i><span>Participaré de las <b>jornadas periódicas de trabajo</b> a cargo del Jefe de la Secretaría Académica del DCFyCCCO, junto con personal del Departamento.</span></div>
         </div>
+        <label class="f" style="margin:6px 0 18px"><span>Opinión y/u observaciones <span class="opc">(opcional)</span></span><textarea name="observaciones" placeholder="Podés dejarnos tu opinión o cualquier observación que quieras compartir"></textarea></label>
         <label class="check" id="chk1"><input type="checkbox" id="acepto1">Tomo conocimiento de las condiciones del ejercicio docente para el ciclo lectivo 2027 (cursado de 9 meses, aproximadamente 350 aspirantes distribuidos en 10 secciones, turnos mañana y/o tarde).</label>
         <label class="check" id="chk2"><input type="checkbox" id="acepto2">Declaro que los datos y la documentación son verídicos y presto conformidad para su uso exclusivo por la Secretaría Académica del DCFyCCCO.</label>
       </div>
@@ -559,42 +575,17 @@ footer{text-align:center;color:var(--mut);font-size:12px;margin-top:40px}
 
   <section id="vOk" class="card done hidden">
     <div class="okc"><svg viewBox="0 0 24 24" fill="none" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12l5 5L20 7"/></svg></div>
-    <h2 style="font-size:30px">Registro completado</h2>
+    <h2 style="font-size:30px" id="okTit">Registro completado</h2>
     <p style="color:var(--mut);margin-top:6px">Tu número de registro es</p>
     <div class="nro" id="okNro">#0000</div>
     <p style="color:var(--mut);max-width:460px;margin:0 auto 20px" id="okTxt"></p>
     <div id="okPend"></div>
-    <div class="nota" style="text-align:left;max-width:460px;margin:0 auto 22px">La Secretaría Académica analizará tu registro y se comunicará con vos para coordinar la entrevista personal y las instancias siguientes.</div>
+    <div class="nota" style="text-align:left;max-width:460px;margin:0 auto 18px">La Secretaría Académica analizará tu registro y se comunicará con vos para coordinar la entrevista personal y las instancias siguientes.</div>
+    <p class="lema2">Detrás de cada Agente de Seguridad, <span>hay un docente que lo formó.</span></p>
     <p style="color:var(--mut);font-size:13px;margin-bottom:18px">Hacé una captura de pantalla para conservar el comprobante.</p>
     <button class="btn ghost" onclick="location.reload()">Volver al inicio</button>
   </section>
 
-  <section id="vComp" class="hidden">
-    <div class="card st" style="margin-top:6px">
-      <div class="st-h"><span class="k">📎</span><div><h2>Completar documentación</h2><p>Si ya te registraste, subí acá la documentación que te faltaba.</p></div></div>
-      <div id="cErr"></div>
-      <div id="cPaso1">
-        <div class="grid">
-          <label class="f"><span>DNI</span><input id="cDni" inputmode="numeric" placeholder="Sin puntos"></label>
-          <label class="f"><span>Número de registro</span><input id="cNro" inputmode="numeric" placeholder="Ej.: 0127"></label>
-        </div>
-        <p class="hint">Es el número que te apareció al terminar tu registro (ej.: #0127). Si no lo tenés, comunicate con la Secretaría Académica.</p>
-        <div class="nav" style="margin-top:18px"><button class="btn ghost" onclick="volverInicio()">← Inicio</button><button class="btn dark" id="bCBus" onclick="buscarRegistro()">Continuar</button></div>
-      </div>
-      <div id="cPaso2" class="hidden">
-        <div class="alert info" id="cHola"></div>
-        <div id="upsC"></div>
-        <div class="nav" style="margin-top:6px"><button class="btn ghost" onclick="volverInicio()">← Inicio</button><button class="btn dark" onclick="enviarComp()">Enviar documentación ✓</button></div>
-      </div>
-    </div>
-  </section>
-
-  <section id="vCompOk" class="card done hidden">
-    <div class="okc"><svg viewBox="0 0 24 24" fill="none" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12l5 5L20 7"/></svg></div>
-    <h2 style="font-size:30px">¡Documentación recibida!</h2>
-    <p style="color:var(--mut);max-width:460px;margin:10px auto 22px" id="cOkTxt"></p>
-    <button class="btn ghost" onclick="volverInicio()">Volver al inicio</button>
-  </section>
 
   <footer>Desarrollado por MLF · Secretaría Académica DCFyCCCO</footer>
 </div>
@@ -706,13 +697,14 @@ const CATS = [
   {id:'cursos',   g:'opc',  ico:'📜', t:'Certificados de cursos', d:'Capacitaciones y especializaciones'}
 ];
 const GRUPOS = {
-  ya:   {t:'Documentación obligatoria', e:'Obligatoria', d:'Se sube al momento de registrarte.'},
-  venc: {t:'Documentación con vencimiento', e:'Podés subirla después', d:'Como tienen vencimiento, se presentan con la fecha más cercana al inicio del cursado. Podés subirlos ahora o más adelante desde “Completar documentación”.'},
+  ya:   {t:'Documentación obligatoria', e:'Retirados y civiles', d:'Se adjunta al momento de registrarte.'},
+  venc: {t:'Documentación con vencimiento', e:'Opcional al registrarte', d:'Como tienen vencimiento, se presentan con la fecha más cercana al inicio del cursado. Podés adjuntarlos ahora; si no, la Secretaría Académica los solicitará oportunamente.'},
   opc:  {t:'Opcional', e:'Opcional', d:''}
 };
 const CHECK = CATS.filter(c=>c.g!=='opc');
 function docEstado(d){
   const tiene = new Set((d.docs||[]).map(x=>x.cat));
+  if(d.situacion==='actividad') return {ok:0, tot:0, falta:[], tiene, exento:true};
   const falta = CHECK.filter(c=>!tiene.has(c.id));
   return {ok:CHECK.length-falta.length, tot:CHECK.length, falta, tiene};
 }
@@ -767,7 +759,7 @@ function atras(){
 }
 
 function siguiente(){
-  if(!validarPaso(paso)) return mostrarError('Revisá los campos marcados en rojo.');
+  if(!validarPaso(paso)) return mostrarError(paso===3 ? 'Adjuntá la documentación obligatoria: D.N.I., constancia de CUIL y último título.' : 'Revisá los campos marcados en rojo.');
   if(paso < PASOS.length-1) mostrarPaso(paso+1); else enviar();
 }
 
@@ -782,27 +774,18 @@ function validarPaso(n){
   const req = names => names.forEach(k => { if(!frm[k].value.trim()) marcar(frm[k]); });
   document.querySelectorAll(`[data-step="${n}"] .bad`).forEach(e=>e.classList.remove('bad'));
   if(n===0){
-    req(['apellido','nombre','dni','fecha_nac','domicilio','ciudad','telefono']);
+    req(['apellido','nombre','dni']);
     const d = frm.dni.value.replace(/\D/g,'');
     if(frm.dni.value.trim() && (d.length<7||d.length>9)) marcar(frm.dni);
     const e = edad(frm.fecha_nac.value);
     if(frm.fecha_nac.value && (e<18 || e>90)) marcar(frm.fecha_nac);
-    if(frm.telefono.value.trim() && frm.telefono.value.replace(/\D/g,'').length<8) marcar(frm.telefono);
     if(frm.email.value.trim() && !/^\S+@\S+\.\S+$/.test(frm.email.value.trim())) marcar(frm.email);
   }
   if(n===1){
-    const s = frm.situacion.value;
-    if(!s) marcar($('#sitChips'));
-    if(s==='actividad') req(['jerarquia','unidad','unidad_domicilio','fecha_ingreso','cargo','horario']);
+    if(!frm.situacion.value) marcar($('#sitChips'));
     if(frm.fecha_ingreso.value && new Date(frm.fecha_ingreso.value) > new Date()) marcar(frm.fecha_ingreso);
   }
-  if(n===2){
-    const c = frm.condicion_docente.value;
-    if(!c) marcar($('#condChips'));
-    if(c==='actual') req(['materia_actual']);
-    if(!MATSEL.size && !frm.materia_otra.value.trim()) marcar($('#msMat'));
-  }
-  if(n===3) CATS.filter(c=>c.req).forEach(c => { if(!BOX.r[c.id].length) marcar(document.getElementById('up-r-'+c.id)); });
+  if(n===3 && frm.situacion.value!=='actividad') CATS.filter(c=>c.req).forEach(c => { if(!BOX.r[c.id].length) marcar(document.getElementById('up-r-'+c.id)); });
   if(n===4){ ['1','2'].forEach(i => { if(!$('#acepto'+i).checked) marcar($('#chk'+i)); }); }
   return ok;
 }
@@ -810,7 +793,7 @@ frm.addEventListener('input', e => { e.target.classList.remove('bad'); e.target.
 
 function actualizarSituacion(){
   const s = frm.situacion.value, A = s==='actividad', R = s==='retirado';
-  const pol = A || R, ast = A ? ' <b>*</b>' : '', opc = (A ? '' : ' <small style="font-weight:500;color:var(--mut)">(si corresponde)</small>');
+  const pol = A || R, ast = '', opc = (A ? '' : ' <small style="font-weight:500;color:var(--mut)">(si corresponde)</small>');
   $('#sitCampos').classList.toggle('hidden', !s);
   document.querySelectorAll('.pol').forEach(e=>e.classList.toggle('hidden', !pol));
   $('#lblJer').innerHTML = 'Jerarquía' + ast;
@@ -819,6 +802,7 @@ function actualizarSituacion(){
   $('#lblFIng').innerHTML = (pol ? 'Fecha de ingreso a la institución policial' : 'Fecha de ingreso al lugar en el que trabaja') + ast;
   $('#lblCargo').innerHTML = (A ? 'Cargo o función que ocupa en la unidad' : 'Cargo o función que ocupa') + ast + opc;
   $('#lblHor').innerHTML = (A ? 'Horario que cumple en la unidad' : 'Horario que cumple') + ast + opc;
+  $('#exento').classList.toggle('hidden', !A); $('#ups').classList.toggle('hidden', A);
 }
 frm.querySelectorAll('[name=condicion_docente]').forEach(r=>r.addEventListener('change', () => {
   $('#condChips').classList.remove('bad');
@@ -828,7 +812,9 @@ frm.querySelectorAll('[name=situacion]').forEach(r=>r.addEventListener('change',
 
 /* ---------- selector de materias ---------- */
 const MATSEL = new Set();
-$('#msList').innerHTML = MATERIAS.map((m,i)=>`<label><input type="checkbox" value="${i}" onchange="selMat(${i},this.checked)">${m}</label>`).join('');
+$('#msList').innerHTML = MATERIAS.map((m,i)=>`<label><input type="checkbox" value="${i}" onchange="selMat(${i},this.checked)">${m}</label>`).join('') + `<label style="border-top:1px solid var(--line);border-radius:0 0 12px 12px;margin-top:4px"><input type="checkbox" id="msOtra" onchange="selOtra(this.checked)">Otra (escribir el nombre)</label>`;
+function selOtra(on){ $('#msOtra').checked = on; $('#otraWrap').classList.toggle('hidden', !on); if(!on) frm.materia_otra.value=''; pintarMs(); if(on) setTimeout(()=>frm.materia_otra.focus(),50); }
+frm.materia_otra.addEventListener('input', pintarMs);
 function toggleMs(abrirlo){
   const ab = abrirlo ?? $('#msPop').classList.contains('hidden');
   $('#msPop').classList.toggle('hidden', !ab); $('#msBtn').classList.toggle('open', ab);
@@ -836,14 +822,17 @@ function toggleMs(abrirlo){
 function selMat(i, on){
   on ? MATSEL.add(MATERIAS[i]) : MATSEL.delete(MATERIAS[i]);
   $('#msList').querySelectorAll('input')[i].checked = on;
-  $('#msMat').classList.remove('bad');
-  const n = MATSEL.size;
+  pintarMs();
+}
+function pintarMs(){
+  const otra = $('#msOtra')?.checked, ot = frm.materia_otra.value.trim();
+  const n = MATSEL.size + (otra ? 1 : 0);
   $('#msTxt').textContent = n ? `${n} materia${n===1?'':'s'} seleccionada${n===1?'':'s'}` : 'Seleccioná una o más materias';
   $('#msCnt').textContent = n ? `${n} seleccionada${n===1?'':'s'}` : 'Ninguna seleccionada';
-  $('#msChips').innerHTML = MATERIAS.map((m,j)=>MATSEL.has(m)?`<span>${m}<button type="button" title="Quitar" onclick="selMat(${j},false)">×</button></span>`:'').join('');
+  $('#msChips').innerHTML = MATERIAS.map((m,j)=>MATSEL.has(m)?`<span>${m}<button type="button" title="Quitar" onclick="selMat(${j},false)">×</button></span>`:'').join('') + (otra ? `<span>Otra${ot?': '+esc(ot):''}<button type="button" title="Quitar" onclick="selOtra(false)">×</button></span>` : '');
 }
 function materiasTxt(){
-  const o = frm.materia_otra.value.trim();
+  const o = $('#msOtra').checked ? frm.materia_otra.value.trim() : '';
   return [...MATERIAS.filter(m=>MATSEL.has(m)), ...(o ? ['Otra: '+o] : [])].join('; ');
 }
 frm.querySelectorAll('[name=situacion]').forEach(r=>r.addEventListener('change', actualizarSituacion));
@@ -926,18 +915,19 @@ function comprimir(file){
 function armarResumen(){
   const s = frm.situacion.value, v = k => frm[k].value.trim(), c = frm.condicion_docente.value;
   const n = cantArch('r');
-  const pend = CHECK.filter(c=>!BOX.r[c.id].length).map(c=>CAT_CORTO[c.id]);
+  const pend = CHECK.filter(c=>!BOX.r[c.id].length && !(EDIT && EDIT.cats.includes(c.id))).map(c=>CAT_CORTO[c.id]);
   const fila = (t,x) => x ? `<dt>${t}</dt><dd>${esc(x)}</dd>` : '';
   $('#resumen').innerHTML =
     fila('Docente', `${v('apellido').toUpperCase()}, ${v('nombre')}`) + fila('D.N.I.', v('dni')) +
-    fila('Nacimiento', `${fDia(v('fecha_nac'))} (${edad(v('fecha_nac'))} años)`) +
-    fila('Domicilio', `${v('domicilio')} · ${v('ciudad')}`) +
+    fila('Nacimiento', v('fecha_nac') ? `${fDia(v('fecha_nac'))} (${edad(v('fecha_nac'))} años)` : '') +
+    fila('Domicilio', [v('domicilio'), v('ciudad')].filter(Boolean).join(' · ')) +
     fila('Situación', [SIT_TXT[s], s!=='civil'?v('jerarquia'):'', v('lp')?'L.P. '+v('lp'):''].filter(Boolean).join(' · ')) +
     fila('Lugar laboral', [v('unidad'), v('cargo')].filter(Boolean).join(' · ')) +
-    fila('Contacto', v('telefono') + (v('email') ? ' · '+v('email') : '')) +
-    fila('Experiencia', COND_TXT[c] + (c==='actual' && v('materia_actual') ? ' — '+v('materia_actual') : '')) +
-    fila('Materias', materiasTxt()) + fila('Documentación', `${n} archivo${n===1?'':'s'}`) +
-    (pend.length ? fila('Para después', pend.join(', ')) : '');
+    fila('Contacto', [v('telefono'), v('email')].filter(Boolean).join(' · ')) +
+    fila('Experiencia', c ? COND_TXT[c] + (c==='actual' && v('materia_actual') ? ' — '+v('materia_actual') : '') : '') +
+    fila('Materias', materiasTxt()) +
+    (s==='actividad' ? fila('Documentación', 'No corresponde (personal en actividad)') :
+      fila('Documentación', `${n} archivo${n===1?'':'s'} nuevo${n===1?'':'s'}`) + (pend.length ? fila('Pendiente', pend.join(', ')) : ''));
 }
 
 async function enviar(){
@@ -946,11 +936,13 @@ async function enviar(){
   const ov = overlay();
   const fin = msg => { ov.close(); if(msg) mostrarError(msg); };
   try{
-    const {data:ya, error:e0} = await sb.rpc('conv_ya_inscripto', {p_dni:v('dni'), p_lp: v('lp')});
-    if(e0) throw e0;
-    if(ya) return fin('Ya existe un registro con ese DNI o LP. Si te falta documentación, usá “Completar documentación” desde el inicio.');
-    const carpeta = `${new Date().getFullYear()}/${v('dni').replace(/\D/g,'')}-${uid().slice(0,8)}`;
-    const docs = await subirArchivos('r', carpeta, ov.set);
+    if(!EDIT){
+      const {data:ya, error:e0} = await sb.rpc('conv_ya_inscripto', {p_dni:v('dni'), p_lp: v('lp')});
+      if(e0) throw e0;
+      if(ya) return fin('Ya existe un registro con ese D.N.I. o L.P. Si necesitás modificar algún dato, comunicate con la Secretaría Académica.');
+    }
+    const carpeta = (EDIT && EDIT.carpeta) || `${new Date().getFullYear()}/${v('dni').replace(/\D/g,'')}-${uid().slice(0,8)}`;
+    const docs = s==='actividad' ? [] : await subirArchivos('r', carpeta, ov.set);
     ov.set('Guardando tus datos…');
     const p = {
       apellido:v('apellido'), nombre:v('nombre'), dni:v('dni'), telefono:v('telefono'), email:v('email'), ciudad:v('ciudad'),
@@ -959,22 +951,28 @@ async function enviar(){
       unidad_domicilio:v('unidad_domicilio'), fecha_ingreso:v('fecha_ingreso'), cargo:v('cargo'), horario:v('horario'),
       condicion_docente:frm.condicion_docente.value, materia_actual: frm.condicion_docente.value==='actual' ? v('materia_actual') : '',
       titulo:v('titulo'), cursos:v('cursos'), materias:materiasTxt(),
-      experiencia:v('experiencia'), docs, carpeta, acepta:true
+      experiencia:v('experiencia'), observaciones:v('observaciones'), docs, carpeta, acepta:true
     };
-    const {data, error} = await sb.rpc('registrar_postulante', {p});
+    const {data, error} = EDIT
+      ? await sb.rpc('conv_actualizar', {p_dni:EDIT.dni, p_nro:EDIT.nro, p})
+      : await sb.rpc('registrar_postulante', {p});
     if(error){
       const m = error.message||'';
-      if(m.includes('DUPLICADO')) return fin('Ya existe un registro con ese DNI o LP.');
+      if(m.includes('DUPLICADO')) return fin('Ya existe un registro con ese D.N.I. o L.P.');
       if(m.includes('CERRADA'))   return fin('El registro se encuentra cerrado en este momento.');
-      if(m.includes('FALTA_DOC')) return fin('Tenés que adjuntar el DNI, la constancia de CUIL y el último título.');
+      if(m.includes('FALTA_DOC')) return fin('Adjuntá la documentación obligatoria: D.N.I., constancia de CUIL y último título.');
       throw error;
     }
     fin();
-    const pend = CHECK.filter(c=>!BOX.r[c.id].length);
+    const nro = EDIT ? EDIT.nro : data;
+    const pend = s==='actividad' ? [] : CHECK.filter(c=>!BOX.r[c.id].length && !(EDIT && EDIT.cats.includes(c.id)));
     $('#vWiz').classList.add('hidden');
-    $('#okNro').textContent = '#'+pad(data);
-    $('#okTxt').textContent = `${v('nombre').trim()} ${v('apellido').trim()}, tus datos y tu documentación quedaron guardados en la base docente del DCFyCCCO.`;
-    $('#okPend').innerHTML = pend.length ? `<div class="nota" style="text-align:left;max-width:460px;margin:0 auto 14px"><b>Documentación pendiente:</b> ${pend.map(c=>CAT_CORTO[c.id]).join(', ')}.<br>Cuando la tengas (lo más cerca posible del inicio del cursado), entrá a este mismo link → <b>Completar documentación</b>, con tu DNI y tu número de registro <b>#${pad(data)}</b>.</div>` : '';
+    $('#okTit').textContent = EDIT ? 'Registro actualizado' : 'Registro completado';
+    $('#okNro').textContent = '#'+pad(nro);
+    $('#okTxt').textContent = EDIT
+      ? `${v('nombre').trim()} ${v('apellido').trim()}, los cambios quedaron guardados. Tu número de registro se mantiene.`
+      : `${v('nombre').trim()} ${v('apellido').trim()}, tus datos quedaron guardados en la base docente del DCFyCCCO.`;
+    $('#okPend').innerHTML = pend.length ? `<div class="nota" style="text-align:left;max-width:460px;margin:0 auto 14px"><b>Documentación con vencimiento pendiente:</b> ${pend.map(c=>CAT_CORTO[c.id]).join(', ')}.<br>Como tiene vencimiento, la Secretaría Académica la solicitará con la fecha más cercana al inicio del cursado.</div>` : '';
     $('#vOk').classList.remove('hidden');
     window.scrollTo({top:0,behavior:'smooth'});
   }catch(err){
@@ -991,22 +989,39 @@ function abrirCompletar(){
 }
 function volverInicio(){ location.href = location.href.split('#')[0]; }
 function cErr(msg){ $('#cErr').innerHTML = msg ? `<div class="alert err">${msg}</div>` : ''; if(msg) window.scrollTo({top:0,behavior:'smooth'}); }
+let EDIT = null;
 async function buscarRegistro(){
   cErr('');
   if(!CONFIGURADO) return cErr('El sistema todavía no está conectado a la base de datos.');
   const dni = $('#cDni').value.replace(/\D/g,''), nro = parseInt($('#cNro').value.replace(/\D/g,''),10);
-  if(dni.length<7 || !nro) return cErr('Completá tu DNI y tu número de registro.');
+  if(dni.length<7 || !nro) return cErr('Completá tu D.N.I. y tu número de registro.');
   const b = $('#bCBus'); b.disabled = true; b.textContent = 'Buscando…';
-  const {data, error} = await sb.rpc('conv_verificar', {p_dni:dni, p_nro:nro});
+  const {data, error} = await sb.rpc('conv_obtener', {p_dni:dni, p_nro:nro});
   b.disabled = false; b.textContent = 'Continuar';
   if(error) return cErr('No se pudo verificar. Intentá nuevamente.');
-  if(!data) return cErr('No encontramos un registro con esos datos. Revisá el DNI y el número de registro.');
-  REG = {dni, nro, ...data};
-  const tiene = Object.fromEntries((data.cats||[]).map(c=>[c,true]));
-  const falta = CHECK.filter(c=>!tiene[c.id]).map(c=>CAT_CORTO[c.id]);
-  $('#cHola').innerHTML = `Hola, <b>${esc(data.nombre)}</b> (registro #${pad(nro)}). ${falta.length ? `Te falta: <b>${falta.join(', ')}</b>.` : 'Ya tenés toda la documentación cargada; podés agregar archivos si lo necesitás.'} Lo que ya cargaste aparece con ✓.`;
-  armarUps('c', $('#upsC'), tiene);
-  $('#cPaso1').classList.add('hidden'); $('#cPaso2').classList.remove('hidden');
+  if(!data) return cErr('No encontramos un registro con esos datos. Revisá el D.N.I. y el número de registro.');
+  cargarEnFormulario(data);
+  EDIT = {dni, nro, carpeta:data.carpeta, cats:[...new Set((data.docs||[]).map(x=>x.cat))]};
+  frm.dni.readOnly = true; frm.dni.title = 'El D.N.I. no se puede modificar';
+  armarUps('r', $('#ups'), Object.fromEntries(EDIT.cats.map(c=>[c,true])));
+  $('#vComp').classList.add('hidden'); $('#vWiz').classList.remove('hidden');
+  mostrarPaso(0);
+  $('#frmErr').innerHTML = `<div class="alert info">Estás editando el registro <b>#${pad(nro)}</b>. Modificá lo que necesites y enviá al final: el número de registro no cambia.</div>`;
+}
+function cargarEnFormulario(d){
+  const set = (k,v) => { if(frm[k] && v!=null) frm[k].value = v; };
+  ['apellido','nombre','dni','telefono','email','ciudad','domicilio','lp','jerarquia','unidad','unidad_domicilio','cargo','horario','materia_actual','titulo','cursos','experiencia','observaciones'].forEach(k=>set(k,d[k]));
+  set('fecha_nac', d.fecha_nac ? String(d.fecha_nac).slice(0,10) : '');
+  set('fecha_ingreso', d.fecha_ingreso ? String(d.fecha_ingreso).slice(0,10) : '');
+  const radio = (n,v) => { const r = frm.querySelector(`[name=${n}][value="${condK(v)||v}"]`); if(r){ r.checked = true; r.dispatchEvent(new Event('change')); } };
+  if(d.situacion) radio('situacion', d.situacion);
+  if(d.condicion_docente) radio('condicion_docente', d.condicion_docente);
+  (d.materias||'').split(';').map(x=>x.trim()).filter(Boolean).forEach(m => {
+    const i = MATERIAS.indexOf(m);
+    if(i>=0) selMat(i, true);
+    else { selOtra(true); frm.materia_otra.value = m.replace(/^Otra:\s*/,''); pintarMs(); }
+  });
+  actualizarSituacion();
 }
 async function enviarComp(){
   cErr('');
@@ -1043,7 +1058,6 @@ async function iniciarPublico(){
     $('#badge').className = 'badge off'; $('#badge').innerHTML = '<i></i> Registro cerrado';
     $('#cfgMsg').innerHTML = '<div class="alert info">El registro docente se encuentra cerrado en este momento. Agradecemos tu interés.</div>';
     $('#cta1 .btn').classList.add('hidden'); $('#cta2 .btn').classList.add('hidden');
-    $('#cta2 h3').textContent = '¿Ya te registraste?'; $('#cta2 p').textContent = 'Podés seguir completando tu documentación.';
   } else if(CFG.fecha_cierre){
     $('#cfgMsg').innerHTML = `<div class="alert info">Registro abierto hasta el ${fmtFecha(CFG.fecha_cierre)} hs</div>`;
   }
@@ -1086,7 +1100,7 @@ async function cargar(){
   const {data, error} = await sb.from('conv_postulantes').select('*').order('nro',{ascending:false});
   if(error){ toast('Error al cargar los datos'); return; }
   DATA = data || [];
-  const ciu = [...new Set(DATA.map(d=>d.ciudad.trim()))].sort((a,b)=>a.localeCompare(b));
+  const ciu = [...new Set(DATA.map(d=>(d.ciudad||'').trim()).filter(Boolean))].sort((a,b)=>a.localeCompare(b));
   const sel = $('#fCiu').value;
   $('#fCiu').innerHTML = '<option value="">Toda ciudad</option>' + ciu.map(c=>`<option ${c===sel?'selected':''}>${esc(c)}</option>`).join('');
   render();
@@ -1101,7 +1115,7 @@ function filtrados(){
     (!FCOND || condK(d.condicion_docente)===FCOND) &&
     (!$('#fMat').value || norm(d.materias).includes(norm($('#fMat').value))) &&
     (!$('#fEst').value || d.estado===$('#fEst').value) &&
-    (!$('#fCiu').value || d.ciudad.trim()===$('#fCiu').value) &&
+    (!$('#fCiu').value || (d.ciudad||'').trim()===$('#fCiu').value) &&
     (!$('#fDoc').value || (docEstado(d).falta.length===0) === ($('#fDoc').value==='completa')) &&
     (!q || norm([d.apellido,d.nombre,d.dni,d.lp,d.unidad,d.materias,d.materia_actual,d.cursos,d.titulo,d.jerarquia,d.ciudad,d.cargo,d.domicilio].join(' ')).includes(q)));
 }
@@ -1124,7 +1138,7 @@ function render(){
         <div class="pills"><span class="pill p-${d.situacion}">${SIT_TXT[d.situacion]}</span>${d.condicion_docente?`<span class="pill p-${condK(d.condicion_docente)}">${COND_TXT[d.condicion_docente]}</span>`:''}</div></div>
       ${d.unidad?`<div class="meta">📍 ${esc(d.unidad)}</div>`:''}
       <div class="mat">📚 ${esc(d.materias)}</div>
-      <div class="ft"><span>#${pad(d.nro)} · ${fmtFecha(d.creado)} · <span class="${docEstado(d).falta.length?'':'dok'}">📎 ${docEstado(d).ok}/${docEstado(d).tot}</span></span><b class="e-${d.estado}">● ${EST_TXT[d.estado]||d.estado}</b></div>
+      <div class="ft"><span>#${pad(d.nro)} · ${fmtFecha(d.creado)} · ${docEstado(d).exento ? '<span class="dok">📎 No requiere</span>' : `<span class="${docEstado(d).falta.length?'':'dok'}">📎 ${docEstado(d).ok}/${docEstado(d).tot}</span>`}</span><b class="e-${d.estado}">● ${EST_TXT[d.estado]||d.estado}</b></div>
     </div>`).join('') : '<div class="empty">No hay docentes que coincidan.</div>';
 }
 ['fQ','fSit','fMat','fEst','fCiu','fDoc'].forEach(id => $('#'+id).addEventListener('input', render));
@@ -1152,11 +1166,11 @@ async function ver(id){
       <dt>Teléfono</dt><dd><a href="https://wa.me/${waNum(d.telefono)}" target="_blank">${esc(d.telefono)}</a></dd>
       ${d.email?`<dt>Correo</dt><dd><a href="mailto:${esc(d.email)}">${esc(d.email)}</a></dd>`:''}
       ${row('Experiencia en la Escuela',COND_TXT[d.condicion_docente])}${row('Materia/s que dicta',d.materia_actual)}
-      ${row('Materias de interés',d.materias)}${row('Título',d.titulo)}${row('Cursos',d.cursos)}${row('Otra experiencia',d.experiencia)}
+      ${row('Materias de interés',d.materias)}${row('Opinión / observaciones',d.observaciones)}${row('Última edición',d.actualizado?fmtFecha(d.actualizado):'')}${row('Título',d.titulo)}${row('Cursos',d.cursos)}${row('Otra experiencia',d.experiencia)}
     </dl>
-    <div class="dg"><h4><span>📎 Documentación · ${de.ok} de ${de.tot}</span>${docs.length?`<button class="btn sm ghost" id="bZip" onclick="bajarZip('${d.id}')">⬇ Descargar todo</button>`:''}</h4>
+    <div class="dg"><h4><span>📎 Documentación · ${de.exento ? 'no requiere (en actividad)' : de.ok+' de '+de.tot}</span>${docs.length?`<button class="btn sm ghost" id="bZip" onclick="bajarZip('${d.id}')">⬇ Descargar todo</button>`:''}</h4>
       <div class="chkl">${CHECK.map(c=>`<div class="${de.tiene.has(c.id)?'si':'no'}"><i>${de.tiene.has(c.id)?'✓':'·'}</i>${c.t}${de.tiene.has(c.id)?'':' — pendiente'}</div>`).join('')}</div>
-      ${de.falta.length?`<a class="btn sm ghost" style="margin-bottom:10px" target="_blank" href="https://wa.me/${waNum(d.telefono)}?text=${encodeURIComponent(`Hola ${d.nombre.split(' ')[0]}, te escribimos de la Secretaría Académica del DCFyCCCO por el Registro Docente 2027. Te falta presentar: ${de.falta.map(c=>CAT_CORTO[c.id]).join(', ')}. Podés subirla en ${linkPublico()} → "Completar documentación", con tu DNI y tu número de registro #${pad(d.nro)}. ¡Gracias!`)}">💬 Pedir lo pendiente por WhatsApp</a>`:''}
+      ${de.falta.length?`<a class="btn sm ghost" style="margin-bottom:10px" target="_blank" href="https://wa.me/${waNum(d.telefono)}?text=${encodeURIComponent(`Hola ${d.nombre.split(' ')[0]}, te escribimos de la Secretaría Académica del DCFyCCCO por el Registro Docente 2027. Te falta presentar: ${de.falta.map(c=>CAT_CORTO[c.id]).join(', ')}. Por favor, acercala a la Secretaría Académica indicando tu número de registro #${pad(d.nro)}. Muchas gracias.`)}">💬 Pedir lo pendiente por WhatsApp</a>`:''}
       ${grupos.length ? grupos.map(g => `<div style="font:600 12px Inter;color:var(--mut);margin:10px 0 6px">${g.c.ico} ${g.c.t}</div>
         <div class="files">${g.it.map(x=>`<div class="fi" onclick="abrirDoc('${esc(x.path)}')"><div class="th">${x.tipo==='application/pdf'?'PDF':'IMG'}</div><span class="nm">${esc(x.nombre)}</span><span class="sz">${fmtSz(x.tam||0)} ↗</span></div>`).join('')}</div>`).join('')
       : '<div style="color:var(--mut);font-size:13px">Sin documentación adjunta.</div>'}
@@ -1280,9 +1294,9 @@ function libroExcel(L){
     'Unidad / lugar laboral':d.unidad||'', 'Domicilio laboral':d.unidad_domicilio||'', 'Fecha de ingreso':fDia(d.fecha_ingreso),
     'Cargo o función':d.cargo||'', 'Horario':d.horario||'',
     'Experiencia en la Escuela':COND_TXT[d.condicion_docente]||'', 'Materia/s que dicta':d.materia_actual||'',
-    'Materias de interés':d.materias, 'Título':d.titulo||'', 'Cursos realizados':d.cursos||'', 'Otra experiencia docente':d.experiencia||'',
-    ...Object.fromEntries(CHECK.map(c=>[CAT_CORTO[c.id], docEstado(d).tiene.has(c.id)?'Sí':'Pendiente'])),
-    'Doc. completa':docEstado(d).falta.length?'No':'Sí', 'Archivos':(d.docs||[]).length, 'Estado':EST_TXT[d.estado]||d.estado, 'Notas':d.notas||''
+    'Materias de interés':d.materias, 'Título':d.titulo||'', 'Cursos realizados':d.cursos||'', 'Otra experiencia docente':d.experiencia||'', 'Opinión / observaciones':d.observaciones||'',
+    ...Object.fromEntries(CHECK.map(c=>[CAT_CORTO[c.id], docEstado(d).exento?'—':docEstado(d).tiene.has(c.id)?'Sí':'Pendiente'])),
+    'Doc. completa':docEstado(d).exento?'No requiere':docEstado(d).falta.length?'No':'Sí', 'Archivos':(d.docs||[]).length, 'Estado':EST_TXT[d.estado]||d.estado, 'Notas':d.notas||''
   }));
   const ws = XLSX.utils.json_to_sheet(filas);
   ws['!cols'] = Object.keys(filas[0]).map(k => ({wch: Math.min(45, Math.max(9, k.length+2, ...filas.map(f => String(f[k]??'').length*0.8)))}));
@@ -1380,19 +1394,19 @@ async function instalar(){ if(!instEv) return; instEv.prompt(); await instEv.use
 if(ES_APP && 'serviceWorker' in navigator && (location.protocol === 'https:' || location.hostname === 'localhost')) navigator.serviceWorker.register('sw.js').catch(()=>{});
 
 /* ===================== COLORES ===================== */
-const COLORES = {violeta:'Violeta',azul:'Azul',esmeralda:'Esmeralda',atardecer:'Atardecer',rosa:'Rosa',grafito:'Grafito'};
+const COLORES = {turquesa:'Turquesa',violeta:'Violeta',azul:'Azul',esmeralda:'Esmeralda',atardecer:'Atardecer',rosa:'Rosa',grafito:'Grafito'};
 function setTema(t){
   const d = document.documentElement;
   if(t.mode) d.dataset.mode = t.mode;
   if(t.color) d.dataset.color = t.color;
-  try{ localStorage.setItem('reg-doc-tema', JSON.stringify({mode:d.dataset.mode, color:d.dataset.color})); }catch(e){}
+  try{ localStorage.setItem('reg-doc-tema-v19', JSON.stringify({mode:d.dataset.mode, color:d.dataset.color})); }catch(e){}
   pintarTema();
 }
 function pintarTema(){
   const d = document.documentElement;
   document.querySelectorAll('.seg button').forEach(b=>b.classList.toggle('on', b.dataset.m===d.dataset.mode));
   $('#thdots').innerHTML = Object.keys(COLORES).map(c=>`<button data-color="${c}" class="${c===d.dataset.color?'on':''}" title="${COLORES[c]}" onclick="setTema({color:'${c}'})"></button>`).join('') + `<small>${COLORES[d.dataset.color]||''}</small>`;
-  document.querySelector('meta[name=theme-color]').content = d.dataset.mode==='light' ? '#F3F4F7' : '#07070D';
+  document.querySelector('meta[name=theme-color]').content = d.dataset.mode==='light' ? '#EEF7F7' : '#061A20';
 }
 function abrirTema(e){ e.stopPropagation(); pintarTema(); $('#thpop').classList.toggle('hidden'); }
 document.addEventListener('click', e => { if(!e.target.closest('#thpop')) $('#thpop').classList.add('hidden'); });
